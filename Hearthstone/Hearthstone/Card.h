@@ -14,7 +14,7 @@ protected:
 	string description; // what is this card do
 public:
 	virtual void use() {}
-	virtual string doc() { return ""; }
+	virtual string view() { return name; }
 
 };
 

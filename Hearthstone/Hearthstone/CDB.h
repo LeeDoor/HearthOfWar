@@ -4,11 +4,20 @@
 class CDB
 {
 private:
-	vector<Card> cards;
+	vector<Card*> cards;
 	int size;
 public:
 	CDB() {
 		addAll();
+	}
+
+	vector<Card*> getCards() {
+		return cards;
+	}
+
+	Card* getCard(int id) {
+		if (id >= cards.size()) return 0;
+		return cards[id];
 	}
 // "add" functions for adding cards to a data base
 #ifdef block
@@ -22,7 +31,7 @@ public:
 	string description,
 	int damage, 
 	int health ) {
-		People buff = { name,cost,fraction, feature,funcFeat,description,damage,health,size++ };
+		People* buff = new People { name,cost,fraction, feature,funcFeat,description,damage,health,size++ };
 		cards.push_back(buff);
 	}
 
@@ -35,7 +44,7 @@ public:
 		int damage,
 		int health
 	) {
-		People buff = { name,cost,fraction,description,damage,health,size++ };
+		People* buff = new People{ name,cost,fraction,description,damage,health,size++ };
 		cards.push_back(buff);
 	}
 
@@ -48,7 +57,7 @@ public:
 		vector<string> funcFeat,
 		string description) {
 
-		MilFor buff = { name,cost,fraction, feature,funcFeat,description,size++ };
+		MilFor* buff = new MilFor { name,cost,fraction, feature,funcFeat,description,size++ };
 		cards.push_back(buff);
 	}
 	void add
@@ -57,7 +66,7 @@ public:
 		string fraction,
 		string description) {
 
-		MilFor buff = { name,cost,fraction,description,size++ };
+		MilFor* buff = new MilFor{ name,cost,fraction,description,size++ };
 		cards.push_back(buff);
 	}
 #endif 
@@ -67,18 +76,16 @@ public:
 
 #endif
 
-	void addAll() {
-		add("russian citizen", 3, "Russia", "", 3, 1);
+	void viewAll() {
+		for (int i = 0; i < size; i++) {
+			cards[i]->view() ;
+		}
 	}
 
-	void viewAll() {
-		/*for (auto it = cards.begin(); it != cards.end(); it++) {
-			
-		}*/
 
-		for (int i = 0; i < size; i++) {
-			cout << cards[i].doc();
-		}
+	void addAll() { // here i am adding all cards to the game
+		add("citizen", 3, "", "just a citizen", 3, 1);
+		add("pioneer camp counselor", 5, "Russia", "", 6, 3);
 	}
 };
 

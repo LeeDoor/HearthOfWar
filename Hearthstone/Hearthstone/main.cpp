@@ -1,13 +1,23 @@
 using namespace std;
 #include<iostream> // 
-#include"includer.cpp" // all other docs
 #include<ctime> // 
+
+
+class Card;
+class People;
+class MilFor;
+class Deck;
+class CDB;
+
+
+#include"includer.cpp" // all other docs
 
 
 int main() {
 	srand(time(NULL));
 
-	CDB cardDB;
+	CDB* cardDB = new CDB;
 
-	cardDB.viewAll();
+	Deck a(cardDB);
+	a.viewDeck();
 }

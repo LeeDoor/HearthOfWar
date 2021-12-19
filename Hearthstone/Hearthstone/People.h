@@ -56,22 +56,23 @@ public:
 	void use()    {}
 	void death () {}
 
-	string doc() {
+	string view() {
 		string buff ;
-		buff += id;
-		buff += "  ";
+		buff += "(";
+		buff += to_string(id);
+		buff += ")  ";
 		buff += name;
-		buff += "\n";
+		buff += "\n---";
 		buff += description;
-		buff += "\n";
-		buff += cost;
-		buff += " ";
-		buff += health;
-		buff += " ";
-		buff += damage;
-		return buff;
+		buff += "---\nc";
+		buff += to_string(cost);
+		buff += " h";
+		buff += to_string(health);
+		buff += " d";
+		buff += to_string(damage);
+		buff += "\n\n";
+		cout << buff;
 	}
 
-	int getdamage(){return damage;}
 };
 

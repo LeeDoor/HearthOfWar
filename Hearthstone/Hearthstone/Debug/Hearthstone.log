@@ -1,2 +1,4 @@
 ﻿  includer.cpp
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\CDB.h(19,10): warning C4018: >=: несоответствие типов со знаком и без знака
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Deck.h(51,21): warning C4018: <: несоответствие типов со знаком и без знака
   Hearthstone.vcxproj -> D:\prjts\c++\HEARTHOFWAR\Hearthstone\Debug\Hearthstone.exe
