@@ -1,13 +1,3 @@
-using namespace std;
-#include<iostream> // 
-#include<ctime> // 
-
-
-class Card;
-class People;
-class MilFor;
-class Deck;
-class CDB;
 
 
 #include"includer.cpp" // all other docs
@@ -18,6 +8,15 @@ int main() {
 
 	CDB* cardDB = new CDB;
 
-	Deck a(cardDB);
-	a.viewDeck();
+	Deck* firstDeck = new Deck(cardDB);
+	firstDeck->viewDeck();
+
+	Deck* secondDeck = new Deck(cardDB);
+	secondDeck->viewDeck();
+
+	Player* firstPlayer  = new Player(firstDeck);
+	Player* secondPlayer = new Player(secondDeck);
+
+	Field field(firstPlayer, secondPlayer);
+	field.startGame();
 }

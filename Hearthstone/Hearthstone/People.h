@@ -56,7 +56,7 @@ public:
 	void use()    {}
 	void death () {}
 
-	string view() {
+	void view() {
 		string buff ;
 		buff += "(";
 		buff += to_string(id);
