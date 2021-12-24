@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #define block
 
 class CDB
@@ -30,8 +30,9 @@ public:
 	vector<string> funcFeat,
 	string description,
 	int damage, 
-	int health ) {
-		People* buff = new People { name,cost,fraction, feature,funcFeat,description,damage,health,size++ };
+	int health,
+	string picPath) {
+		Creature* buff = new Creature{ name,cost,fraction, feature,funcFeat,description,damage,health,picPath,size++ };
 		cards.push_back(buff);
 	}
 
@@ -42,9 +43,10 @@ public:
 		string fraction,
 		string description,
 		int damage,
-		int health
+		int health,
+		string picPath
 	) {
-		People* buff = new People{ name,cost,fraction,description,damage,health,size++ };
+		Creature* buff = new Creature{ name,cost,fraction,description,damage,health,picPath,size++ };
 		cards.push_back(buff);
 	}
 
@@ -57,7 +59,7 @@ public:
 		vector<string> funcFeat,
 		string description) {
 
-		MilFor* buff = new MilFor { name,cost,fraction, feature,funcFeat,description,size++ };
+		Event* buff = new Event{ name,cost,fraction, feature,funcFeat,description,size++ };
 		cards.push_back(buff);
 	}
 	void add
@@ -66,7 +68,7 @@ public:
 		string fraction,
 		string description) {
 
-		MilFor* buff = new MilFor{ name,cost,fraction,description,size++ };
+		Event* buff = new Event{ name,cost,fraction,description,size++ };
 		cards.push_back(buff);
 	}
 #endif 
@@ -76,16 +78,16 @@ public:
 
 #endif
 
-	void viewAll() {
+	void viewAll(sf::RenderWindow& window) {
 		for (int i = 0; i < size; i++) {
-			cards[i]->view() ;
+			cards[i]->view(window, sf::Vector2f(i*350,0)) ;
 		}
 	}
 
 
 	void addAll() { // here i am adding all cards to the game
-		add("citizen", 3, "", "just a citizen", 3, 1);
-		add("pioneer camp counselor", 5, "Russia", "", 6, 3);
+		add("Skin Wyrm",			 3, "Safe",		"", 4, 4,	"pic\\021.png");
+		add("Egg Timer of Deja Vu",	 2, "Euclid",   "", 2, 2,	"pic\\292.png");
 	}
 };
 

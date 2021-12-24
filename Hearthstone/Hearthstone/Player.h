@@ -4,7 +4,7 @@ class Player
 private:
 	//Person* person
 	Deck* deck;
-	vector<People*> creatures;
+	vector<Creature*> creatures;
 
 	int mana;
 	int currMana;

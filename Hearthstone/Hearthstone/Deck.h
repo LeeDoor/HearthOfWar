@@ -6,7 +6,7 @@ private:
 	vector<Card*> left;
 	vector<Card*> hand;
 	CDB* curDB;
-	const int deckSize = 10;
+	const int DECK_SIZE = 5;
 
 
 	void fillHand(bool isFirst) {
@@ -30,21 +30,21 @@ public:
 		return deck[id];
 	}
 
-	Deck(CDB* cdb) {
+	Deck(CDB* cdb, sf::RenderWindow& window) {
 		curDB = cdb;
-		createDeck();
+		createDeck(window);
 	}
 
-	void createDeck() {
+	void createDeck(sf::RenderWindow& window) {
 		clear();
 
-		curDB->viewAll();
+		curDB->viewAll(window);
 		int a;
 		cout << "\nenter 10 ids of cards you want to add to your deck: ";
-		for (int i = 0; i < deckSize; i++) {
+		for (int i = 0; i < DECK_SIZE; i++) {
 			while (true) {
 				cout << i + 1 << " : ";
-				cin >> a;
+				a = rand()%2;
 				if (curDB->getCard(a) != 0) {
 					deck.push_back(curDB->getCard(a));
 					break;
@@ -55,7 +55,7 @@ public:
 		}
 
 		cout << "\nnow your deck is:\n";
-		viewDeck();
+		viewDeck(window);
 	}
 
 	void clear() {
@@ -67,17 +67,17 @@ public:
 	}
 
 
-	void viewDeck() {
+	void viewDeck(sf::RenderWindow& window) {
 		int size = deck.size();
 		for (int i = 0; i < size; i++) {
-			 deck[i]->view();
+			 deck[i]->view(window, sf::Vector2f(i*(320+60)+50,50));
 		}
 	}
 
-	void viewHand() {
+	void viewHand(sf::RenderWindow& window) {
 		int size = hand.size();
 		for (int i = 0; i < size; i++) {
-			hand[i]->view();
+			hand[i]->view(window, sf::Vector2f(i * 350, 0));
 		}
 	}
 

@@ -1,22 +1,48 @@
-
-
-#include"includer.cpp" // all other docs
+#include"includer.cpp" // including
 
 
 int main() {
 	srand(time(NULL));
+	setlocale(LC_ALL, "Russian");
+
+
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Secure Contain Attack"/*, sf::Style::Fullscreen*/);
 
 	CDB* cardDB = new CDB;
 
-	Deck* firstDeck = new Deck(cardDB);
-	firstDeck->viewDeck();
+	Deck* firstDeck = new Deck(cardDB, window);
 
-	Deck* secondDeck = new Deck(cardDB);
-	secondDeck->viewDeck();
+	//Deck* secondDeck = new Deck(cardDB,window);
 
-	Player* firstPlayer  = new Player(firstDeck);
-	Player* secondPlayer = new Player(secondDeck);
+	//Player* firstPlayer = new Player(firstDeck);
+	//Player* secondPlayer = new Player(secondDeck);
 
-	Field field(firstPlayer, secondPlayer);
-	field.startGame();
+	//Field field(firstPlayer, secondPlayer);
+	//field.startGame();
+	
+	while (window.isOpen()) {
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Space) {
+
+				}
+
+			}
+			window.clear(sf::Color(168, 196, 255));
+
+			firstDeck->viewDeck(window);
+
+			window.display();
+		}
+	}
+	
+
+
+
+	/*
+	*/
 }

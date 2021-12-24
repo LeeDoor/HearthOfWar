@@ -1,7 +1,19 @@
-﻿  includer.cpp
+﻿  main.cpp
 D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\CDB.h(19,10): warning C4018: >=: несоответствие типов со знаком и без знака
-  main.cpp
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\CDB.h(19,10): warning C4018: >=: несоответствие типов со знаком и без знака
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\main.cpp(7,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  Создание кода...
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\CDB.h(83,41): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Deck.h(73,50): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Deck.h(80,41): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\main.cpp(5,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   Hearthstone.vcxproj -> D:\prjts\c++\HEARTHOFWAR\Hearthstone\Debug\Hearthstone.exe

@@ -1,9 +1,9 @@
 #include "vector" // normal massive
 #include "string" 
-using namespace std;
 #include<iostream> // 
 #include<ctime> // 
-
+#include <SFML/Graphics.hpp>
+using namespace std;
 
 class Card;
 class People;
@@ -15,8 +15,8 @@ class Player;
 
 
 #include "Card.h"	// card
-#include "People.h" // entity, creature
-#include "MilFor.h" // Millitary Forces
+#include "Creature.h" // entity, creature
+#include "Event.h" // Millitary Forces
 #include "CDB.h"	// card data base
 #include "Deck.h"	// many cards
 #include "Player.h"	// player
