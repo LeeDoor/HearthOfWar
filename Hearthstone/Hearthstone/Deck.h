@@ -35,10 +35,22 @@ public:
 		createDeck(window);
 	}
 
+	vector<Card*> getDeck() {
+		return deck;
+	}
+
+	vector<Card*> getLeft() {
+		return left;
+	}
+
+	vector<Card*> getHand() {
+		return hand;
+	}
+
+
 	void createDeck(sf::RenderWindow& window) {
 		clear();
 
-		curDB->viewAll(window);
 		int a;
 		cout << "\nenter 10 ids of cards you want to add to your deck: ";
 		for (int i = 0; i < DECK_SIZE; i++) {
@@ -46,16 +58,13 @@ public:
 				cout << i + 1 << " : ";
 				a = rand()%2;
 				if (curDB->getCard(a) != 0) {
-					deck.push_back(curDB->getCard(a));
+					deck.push_back(new Card(curDB->getCard(a)));
 					break;
 				}
 
 			}
 
 		}
-
-		cout << "\nnow your deck is:\n";
-		viewDeck(window);
 	}
 
 	void clear() {
@@ -66,30 +75,15 @@ public:
 		deck.push_back(curDB->getCard(id));
 	}
 
-
-	void viewDeck(sf::RenderWindow& window) {
+	void startGame(bool isFirst) {
 		int size = deck.size();
 		for (int i = 0; i < size; i++) {
-			 deck[i]->view(window, sf::Vector2f(i*(320+60)+50,50));
+			left.push_back(new Card(deck[i]));
 		}
-	}
-
-	void viewHand(sf::RenderWindow& window) {
-		int size = hand.size();
-		for (int i = 0; i < size; i++) {
-			hand[i]->view(window, sf::Vector2f(i * 350, 0));
-		}
-	}
-
-
-	void startGame(bool isFirst) {
-		left = deck;
 		fillHand(isFirst);
 	}
 
-	void useCard(int id) {
-		hand[id + 1]->use();
-	}
+
 
 	static void randomFill(int*& mass, int size, int l, int r) {
 		if (l > r) swap(l, r);

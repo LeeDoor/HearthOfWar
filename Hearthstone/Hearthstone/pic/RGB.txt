@@ -1,0 +1,4 @@
+Thaumiel 99 99 99
+Safe 118 255 163
+Keter 255 124 124
+Euclid 229 255 119

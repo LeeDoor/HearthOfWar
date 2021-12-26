@@ -12,13 +12,13 @@ int main() {
 
 	Deck* firstDeck = new Deck(cardDB, window);
 
-	//Deck* secondDeck = new Deck(cardDB,window);
+	Deck* secondDeck = new Deck(cardDB,window);
 
-	//Player* firstPlayer = new Player(firstDeck);
-	//Player* secondPlayer = new Player(secondDeck);
+	Player* firstPlayer = new Player(firstDeck);
+	Player* secondPlayer = new Player(secondDeck);
 
-	//Field field(firstPlayer, secondPlayer);
-	//field.startGame();
+	Field field(firstPlayer, secondPlayer);
+	field.startGame();
 	
 	while (window.isOpen()) {
 		sf::Event event;
@@ -34,7 +34,7 @@ int main() {
 			}
 			window.clear(sf::Color(168, 196, 255));
 
-			firstDeck->viewDeck(window);
+			field.draw(window);
 
 			window.display();
 		}

@@ -78,11 +78,6 @@ public:
 
 #endif
 
-	void viewAll(sf::RenderWindow& window) {
-		for (int i = 0; i < size; i++) {
-			cards[i]->view(window, sf::Vector2f(i*350,0)) ;
-		}
-	}
 
 
 	void addAll() { // here i am adding all cards to the game
