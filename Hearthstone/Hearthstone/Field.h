@@ -6,7 +6,7 @@ private:
 	Player* secondP;
 
 	bool isFirst;
-
+	float stepTime = 0;
 public:
 	Field(Player* secondP, Player* firstP) {
 		this->firstP = firstP;
@@ -33,7 +33,9 @@ public:
 		else return secondP->step();
 	}
 
-	void draw(sf::RenderWindow& window) {
+	void draw(sf::RenderWindow& window, float time) {
+		stepTime += time;
+
 		// drawing decks
 		sf::Texture Tdeck;
 		Tdeck.loadFromFile("pic\\coloda.png");
@@ -69,8 +71,19 @@ public:
 			toDraw[i]->drawCard(window);
 		}
 		if (chosen != -1)toDraw[chosen]->drawCard(window);
+
+
+		sf::Text timer;
+		sf::Font font;
+		font.loadFromFile("ariali.ttf");
+		timer.setFont(font);
+		timer.setString(to_string(stepTime));
+		timer.setPosition(0,0);
+
+
 		window.draw(Sdeck1);
 		window.draw(Sdeck2);
+		window.draw(timer);
 	}
 };
 

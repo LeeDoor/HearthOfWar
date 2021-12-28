@@ -53,7 +53,7 @@ public:
 		Tvalue.loadFromFile("pic\\BGvalue.png");
 
 
-		if (!font.loadFromFile("BLOODY.TTF"))
+		if (!font.loadFromFile("ariali.ttf"))
 		{
 			cout << "efaefaf";
 		}
@@ -120,7 +120,7 @@ public:
 		}
 		hitbox.setPosition(pos);
 
-		Spic = sf::Sprite(Tpic, sf::IntRect(0, 0, 160, 200));
+		Spic = sf::Sprite(Tpic, sf::IntRect(60, 0, 160, 200));
 		Spic.setPosition(sf::Vector2f(pos.x, pos.y));
 	}
 	void viewBack(sf::Vector2f pos) {
