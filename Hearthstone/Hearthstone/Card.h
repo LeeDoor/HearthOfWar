@@ -4,6 +4,7 @@ class Card
 protected:
 	
 	int id; // special id of a card
+	string gameClass;
 
 	string picPath;
 	string name;
@@ -35,19 +36,47 @@ protected:
 	sf::RectangleShape hitbox;
 	
 public:
-	Card() {}
+	Card() { setTexture(); }
 	Card(Card* card):
-		id(card->id),
-		picPath(card->picPath),
-		name(card->name),
-		cost(card->cost),
-		type(card->type),
-		feature(card->feature),
-		funcFeat(card->funcFeat),
+		id			(card->id),
+		picPath		(card->picPath),
+		name		(card->name),
+		cost		(card->cost),
+		type		(card->type),
+		feature		(card->feature),
+		funcFeat	(card->funcFeat),
 		description(card->description)
 	{
 		setTexture();
 	}
+
+	virtual int getDamage() {
+		return 0;
+	}
+
+	virtual int getHealth() {
+		return 0;
+	}
+
+	string getGameClass() {
+		return gameClass;
+	}
+
+	virtual void copy(Card* card) {
+		this->id = card->id;
+		this->picPath = card->picPath;
+		this->name = card->name;
+		this->cost = card->cost;
+		this->type = card->type;
+		this->feature = card->feature;
+		this->funcFeat = card->funcFeat;
+		this->description = card->description;
+		this->gameClass = card->gameClass;
+		setTexture();
+	}
+
+
+
 	void setTexture() {
 		Tpic.loadFromFile(picPath, sf::IntRect(0, 0, 280, 180));
 		Tvalue.loadFromFile("pic\\BGvalue.png");
@@ -81,7 +110,7 @@ public:
 
 	virtual void viewBig(sf::Vector2f pos) {
 		hitbox = sf::RectangleShape(sf::Vector2f(320, 420));
-		hitbox.setPosition(sf::Vector2f(pos.x,pos.y+50));
+		hitbox.setPosition(pos);
 
 		Sbg = sf::Sprite(Tbg);
 		Sbg.setPosition(pos);
@@ -155,7 +184,7 @@ public:
 		}
 		return false;
 	}
-	void drawCard(sf::RenderWindow& window) {
+	virtual void drawCard(sf::RenderWindow& window) {
 		window.draw(hitbox);
 		switch (DrawType) {
 		case 0:

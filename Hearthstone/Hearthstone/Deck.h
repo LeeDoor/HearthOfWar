@@ -24,7 +24,36 @@ private:
 
 
 	void addCard(int id) { // adds card to deck
-		deck.push_back(curDB->getCard(id));
+		Card* buff = curDB->getCard(id);
+		if (buff->getGameClass() == "Creature") {
+			Creature* adding = new Creature;
+			adding->copy(buff);
+			deck.push_back(adding);
+		}
+		else {
+			Event* adding = new Event;
+			adding->copy(buff);
+			deck.push_back(adding);
+		}
+	}
+	void takeCard() {
+		if (left.size() >= 1) {
+			hand.push_back(left[left.size() - 1]);
+			left.pop_back();
+		}
+	}
+	void addLeft(int id) {
+		Card* buff = deck[id];
+		if (buff->getGameClass() == "Creature") {
+			Creature* adding = new Creature;
+			adding->copy(buff);
+			left.push_back(adding);
+		}
+		else {
+			Event* adding = new Event;
+			adding->copy(buff);
+			left.push_back(adding);
+		}
 	}
 
 public:
@@ -57,12 +86,10 @@ public:
 				cout << i + 1 << " : ";
 				a = rand()%2;
 				if (curDB->getCard(a) != 0) {
-					deck.push_back(new Card(curDB->getCard(a)));
+					addCard(a);
 					break;
 				}
-
 			}
-
 		}
 	}
 	void clear() {
@@ -71,24 +98,12 @@ public:
 	void startGame(bool isFirst) {
 		int size = deck.size();
 		for (int i = 0; i < size; i++) {
-			left.push_back(new Card(deck[i]));
+			addLeft(i);
 		}
 		fillHand(isFirst);
 	}
 
 
-	void takeCard() {
-		if (left.size() >= 1) {
-			hand.push_back(left[left.size() - 1]);
-			left.pop_back();
-		}
-	}
 
-	static void randomFill(int*& mass, int size, int l, int r) {
-		if (l > r) swap(l, r);
-		for (int i = 0; i < size; i++) {
-			mass[i] = rand()%(r-l+1)+l;
-		}
-	}
 };
 

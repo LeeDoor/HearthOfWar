@@ -21,7 +21,7 @@ public:
 	}
 // "add" functions for adding cards to a data base
 #ifdef block
-	void add // creating !!!PEOPLE!!!
+	void add // creating !!!Creature!!!
 		(
 	string name, 
 	int cost,
@@ -51,13 +51,15 @@ public:
 	}
 
 
-	void add // creating !!!MILLITARY FORCE!!!
+	void add // creating !!!Event!!!
 	(
-		string name, int cost,
+		string name,
+		int cost,
 		string fraction,
 		vector<string> feature,
 		vector<string> funcFeat,
-		string description) {
+		string description
+	) {
 
 		Event* buff = new Event{ name,cost,fraction, feature,funcFeat,description,size++ };
 		cards.push_back(buff);

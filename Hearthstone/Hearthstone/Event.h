@@ -20,13 +20,14 @@ public:
 		this->funcFeat = funcFeat;
 		this->description = description;
 		this->id = id;
+		this->gameClass = "Event";
 	}
 	
 	Event(
 		string name,
 		int cost,
 		string type,
-		string description,
+		string description, 
 		int id = -1)
 	{
 		this->name = name;
@@ -34,8 +35,12 @@ public:
 		this->type = type;
 		this->description = description;
 		this->id = id;
+		this->gameClass = "Event";
 	}
 
+	void copy(Card* card) {
+		Card::copy(card);
+	}
 	void use() {}
 };
 
