@@ -93,7 +93,7 @@ public:
 			Tbg.loadFromFile("pic\\BGeuclid.png");
 		}
 		else if (type == "Safe") {
-			Tbg.loadFromFile("pic\\BGketer.png");
+			Tbg.loadFromFile("pic\\BGsafe.png");
 		}
 		else if (type == "Thaumiel") {
 			Tbg.loadFromFile("pic\\BGthaumiel.png");
@@ -127,7 +127,7 @@ public:
 		Tdesc.setFont(font);
 		Tdesc.setString(description);
 		Tdesc.setCharacterSize(14);
-		Tdesc.setPosition(sf::Vector2f(pos.x, pos.y));
+		Tdesc.setPosition(sf::Vector2f(pos.x+20, pos.y+275));
 		Tdesc.setFillColor(sf::Color::Black);
 
 		Scost = sf::Sprite(Tvalue);
@@ -152,19 +152,33 @@ public:
 		Spic = sf::Sprite(Tpic, sf::IntRect(60, 0, 160, 200));
 		Spic.setPosition(sf::Vector2f(pos.x, pos.y));
 	}
-	void viewBack(sf::Vector2f pos) {
-		Sbg = sf::Sprite(Tpic, sf::IntRect(0, 0, 160, 200));
-		Sbg.setPosition(sf::Vector2f(pos.x + 20, pos.y + 15));
+	void viewBack(sf::Vector2f pos, bool isTop = false) {
+		if (isTop == false)
+			hitbox = sf::RectangleShape(sf::Vector2f(80, 200));
+		else {
+
+			hitbox = sf::RectangleShape(sf::Vector2f(160, 200));
+			hitbox.setFillColor(sf::Color(0, 0, 0, 50));
+		}
+		hitbox.setPosition(pos);
+
+		Sbg = sf::Sprite(Tbg, sf::IntRect(0, 0, 160, 200));
+		Sbg.setPosition(sf::Vector2f(pos.x, pos.y));
 	}
-	bool Display(sf::Vector2f pos, bool isFirst = true, bool isTop = false, int chosen = -1) {
+	bool Display(int space, bool isFirst = true, bool isTop = false, int chosen = -1) {
 		hitbox.setFillColor(sf::Color::Black);
+		sf::Vector2f pos(space+150,850);
+		
+
 
 		if (!isFirst) { 
+			pos = sf::Vector2f(space+15,15);
 			DrawType = 2;
 		}
 		else if (hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y) && chosen == -1) {
 			DrawType = 0;
-			pos.y -= 260;
+			if(isFirst)
+				pos.y -= 200;
 		}
 		else {
 			DrawType = 1;
@@ -180,7 +194,7 @@ public:
 			break;
 
 		case 2:
-			viewBack(pos);
+			viewBack(pos, isTop);
 		}
 		return false;
 	}

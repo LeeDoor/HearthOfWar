@@ -84,7 +84,7 @@ public:
 		for (int i = 0; i < DECK_SIZE; i++) {
 			while (true) {
 				cout << i + 1 << " : ";
-				a = rand()%2;
+				a = rand() % curDB->getSize();
 				if (curDB->getCard(a) != 0) {
 					addCard(a);
 					break;

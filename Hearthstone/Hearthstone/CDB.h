@@ -19,6 +19,10 @@ public:
 		if (id >= cards.size()) return 0;
 		return cards[id];
 	}
+
+	int getSize() {
+		return cards.size();
+	}
 // "add" functions for adding cards to a data base
 #ifdef block
 	void add // creating !!!Creature!!!
@@ -58,19 +62,22 @@ public:
 		string fraction,
 		vector<string> feature,
 		vector<string> funcFeat,
-		string description
+		string description,
+		string picPath
 	) {
 
-		Event* buff = new Event{ name,cost,fraction, feature,funcFeat,description,size++ };
+		Event* buff = new Event{ name,cost,fraction, feature,funcFeat,description,picPath,size++ };
 		cards.push_back(buff);
 	}
 	void add
 	(
-		string name, int cost,
+		string name,
+		int cost,
 		string fraction,
-		string description) {
+		string description,
+		string picPath) {
 
-		Event* buff = new Event{ name,cost,fraction,description,size++ };
+		Event* buff = new Event{ name,cost,fraction,description,picPath,size++ };
 		cards.push_back(buff);
 	}
 #endif 
@@ -83,8 +90,9 @@ public:
 
 
 	void addAll() { // here i am adding all cards to the game
-		add("Skin Wyrm",			 3, "Safe",		"", 4, 4,	"pic\\021.png");
-		add("Egg Timer of Deja Vu",	 2, "Euclid",   "", 2, 2,	"pic\\292.png");
+		add("Skin Wyrm", 3, "Safe", "1545461", 4, 4, "pic\\021.png");
+		add("Egg Timer of Deja Vu", 2, "Euclid", "1231231", 2, 2, "pic\\292.png");
+		add("Some spell", 5, "Keter", "some fucking event", "pic\\006.jpg");
 	}
 };
 

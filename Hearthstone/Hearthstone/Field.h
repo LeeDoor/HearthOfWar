@@ -5,7 +5,7 @@ private:
 	Player* firstP;
 	Player* secondP;
 
-	bool isFirst;
+	bool isFirst = false;
 	float stepTime = 0;
 public:
 	Field(Player* secondP, Player* firstP) {
@@ -35,6 +35,10 @@ public:
 
 	void draw(sf::RenderWindow& window, float time) {
 		stepTime += time;
+		if (stepTime >= 5) {
+			//isFirst = !isFirst;
+			//stepTime = 0;
+		}
 
 		// drawing decks
 		sf::Texture Tdeck;
@@ -49,21 +53,30 @@ public:
 		Sdeck2.setPosition(1627, 330);
 
 		//draw hands
-		//first
 		vector<Card*> curDeck = firstP->getDeck()->getHand();
 		int size = curDeck.size();
-		int space = 350;
+		int space = 0;
 		vector<Card*> toDraw;
 		int chosen = -1;
+		bool deckFirst = isFirst;
+		//first
 
-		for (int i = 0; i < size; i++) {
-			if (curDeck[i]->Display(sf::Vector2f(space, 850),isFirst, (i==size-1), chosen)) {
-				space += 320;
-				chosen = i;
+		for (int q = 0; q < 2; q++) {
+			for (int i = 0; i < size; i++) {
+				if (curDeck[i]->Display(space,deckFirst, (i == size - 1), chosen)) {
+					space += 320;
+					chosen = i;
+				}
+				else space += 80;
+				toDraw.push_back(curDeck[i]);
 			}
-			else space += 80;
-			toDraw.push_back(curDeck[i]);
+
+			curDeck = secondP->getDeck()->getHand();
+			size = curDeck.size();
+			space = 0;
+			deckFirst = !deckFirst;
 		}
+
 
 		size = toDraw.size();
 		for (int i = 0; i < size; i++) {
@@ -73,6 +86,8 @@ public:
 		if (chosen != -1)toDraw[chosen]->drawCard(window);
 
 
+
+		//timer (for what)
 		sf::Text timer;
 		sf::Font font;
 		font.loadFromFile("ariali.ttf");

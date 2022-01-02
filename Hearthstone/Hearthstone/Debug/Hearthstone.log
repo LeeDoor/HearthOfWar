@@ -1,5 +1,15 @@
 ﻿  includer.cpp
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(170,25): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(175,28): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -8,7 +18,7 @@ D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,98): warning C4244: 
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -18,13 +28,18 @@ D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,70): warning C4244: 
               T=float
           ]
 D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\CDB.h(19,10): warning C4018: >=: несоответствие типов со знаком и без знака
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Field.h(60,41): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
   main.cpp
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(170,25): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(175,28): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -33,7 +48,7 @@ D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,98): warning C4244: 
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -43,11 +58,6 @@ D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(165,70): warning C4244: 
               T=float
           ]
 D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\CDB.h(19,10): warning C4018: >=: несоответствие типов со знаком и без знака
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Field.h(60,41): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
 D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\main.cpp(5,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   Создание кода...
   Hearthstone.vcxproj -> D:\prjts\c++\HEARTHOFWAR\Hearthstone\Debug\Hearthstone.exe
