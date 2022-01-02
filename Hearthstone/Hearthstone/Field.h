@@ -14,21 +14,17 @@ public:
 
 	}
 
-	void setIsFirst() {
-		isFirst = !isFirst;
-	}
-
 
 	void startGame() {
 		firstP->startGame(true);
 		secondP->startGame(false);
 		isFirst = true;
 
-		while (nextTurn(!isFirst));
+		while (nextTurn());
 		
 	}
 
-	bool nextTurn(bool isFirst) {
+	bool nextTurn() {
 		isFirst = !isFirst;
 
 		if (isFirst) {
@@ -53,37 +49,30 @@ public:
 		Sdeck2.setPosition(1627, 330);
 
 		//draw hands
-		vector<Card*> curDeck = firstP->getDeck()->getHand();
-		int size = curDeck.size();
+		Player* curPlayer = firstP;
+		int size;
 		int space = 0;
 		vector<Card*> toDraw;
-		int chosen = -1;
-		bool deckFirst = true; // где отображается карта сверху чи снизу
+		bool chosen = false;
 		//first
 
 		for (int q = 0; q < 2; q++) {
+			size = curPlayer->getDeck()->getHand().size();
 			for (int i = 0; i < size; i++) {
-				if (curDeck[i]->Display(space,deckFirst, isFirst, (i == size - 1), chosen)) {
-					space += 320;
-					chosen = i;
-				}
-				else space += 80;
-				toDraw.push_back(curDeck[i]);
+				curPlayer->getDeck()->getHand()[i]->Display(space, curPlayer->getCurMana(), chosen, (q == 0), isFirst, (i == size - 1));
+				toDraw.push_back(curPlayer->getDeck()->getHand()[i]);
 			}
 
-			curDeck = secondP->getDeck()->getHand();
-			size = curDeck.size();
+			curPlayer = secondP;
+			chosen = false;
 			space = 0;
-			deckFirst = !deckFirst;
 		}
 
 
 		size = toDraw.size();
 		for (int i = 0; i < size; i++) {
-			if (chosen == i)continue;
 			toDraw[i]->drawCard(window);
 		}
-		if (chosen != -1)toDraw[chosen]->drawCard(window);
 
 
 
@@ -92,7 +81,7 @@ public:
 		sf::Font font;
 		font.loadFromFile("ariali.ttf");
 		timer.setFont(font);
-		timer.setString(to_string(stepTime));
+		timer.setString(to_string(firstP->getCurMana()) + to_string(secondP->getCurMana()));
 		timer.setPosition(0,0);
 
 

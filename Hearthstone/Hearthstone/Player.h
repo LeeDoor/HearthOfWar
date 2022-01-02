@@ -7,7 +7,7 @@ private:
 	vector<Creature*> creatures;
 
 	int mana;
-	int currMana;
+	int curMana;
 public:
 	Player(){}
 	Player(Deck* deck) {
@@ -25,9 +25,8 @@ public:
 
 	bool step() {
 		mana++;
-		currMana = mana;
-		bool flag = true;
-		return (!(flag));
+		curMana = mana;
+		return (false);
 	}
 
 	Deck* getDeck() {
@@ -35,6 +34,9 @@ public:
 	}
 	vector<Creature*> getCreatures() {
 		return creatures;
+	}
+	int getCurMana() {
+		return curMana;
 	}
 };
 

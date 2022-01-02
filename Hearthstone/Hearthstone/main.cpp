@@ -32,7 +32,7 @@ int main() {
 
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Space) {
-					field.setIsFirst();
+					field.nextTurn();
 				}
 			}
 		}

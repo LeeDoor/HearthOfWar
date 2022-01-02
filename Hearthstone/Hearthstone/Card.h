@@ -167,7 +167,15 @@ public:
 		Sbg = sf::Sprite(Tbg, sf::IntRect(0, 0, 160, 200));
 		Sbg.setPosition(sf::Vector2f(pos.x, pos.y));
 	}
-	bool Display(int space,bool deckFirst = true, bool isFirst = true, bool isTop = false, int chosen = -1) {
+
+	// space - free space between cards
+	// mana - mana of current player
+	// deckFirst - is this top or bottom drawing
+	// isFirst - is first playing
+	// isTop - is it last card in the hand(needed for making correct hitbox sizes of card)
+	// chosen
+	void Display(int& space,int mana, bool& chosen, bool deckFirst = true, bool isFirst = true, bool isTop = false) {
+		
 		hitbox.setFillColor(sf::Color::Black);
 		sf::Vector2f pos(space+150,850);
 		
@@ -177,7 +185,7 @@ public:
 		if (isFirst != deckFirst) { 
 			DrawType = 2;
 		}
-		else if (hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y) && chosen == -1) {
+		else if (hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y) && chosen == false) {
 			DrawType = 0;
 			if(isFirst)
 				pos.y -= 200;
@@ -189,16 +197,22 @@ public:
 		switch (DrawType) {
 		case 0:
 			viewBig(pos);
-			return true;
-
+			space += 320;
+			chosen = true;
+			break;
 		case 1:
 			viewLow(pos, isTop);
+			space += 80;
 			break;
 
 		case 2:
+			space += 80;
 			viewBack(pos, isTop);
 		}
-		return false;
+		if (cost <= mana && DrawType != 2 ) {
+			hitbox.setOutlineThickness(8);
+			hitbox.setOutlineColor(sf::Color::Green);
+		}
 	}
 	virtual void drawCard(sf::RenderWindow& window) {
 		window.draw(hitbox);
