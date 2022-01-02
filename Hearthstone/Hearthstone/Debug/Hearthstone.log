@@ -1,15 +1,15 @@
 ﻿  includer.cpp
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(170,25): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(172,25): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(175,28): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(175,29): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(180,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -18,7 +18,7 @@ D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,98): warning C4244: 
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(180,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -29,17 +29,17 @@ D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,70): warning C4244: 
           ]
 D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\CDB.h(19,10): warning C4018: >=: несоответствие типов со знаком и без знака
   main.cpp
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(170,25): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(172,25): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(175,28): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(175,29): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(180,98): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -48,7 +48,7 @@ D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,98): warning C4244: 
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(178,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\Hearthstone\Hearthstone\Card.h(180,70): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int

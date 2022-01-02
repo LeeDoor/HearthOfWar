@@ -161,18 +161,20 @@ public:
 			hitbox.setFillColor(sf::Color(0, 0, 0, 50));
 		}
 		hitbox.setPosition(pos);
+		hitbox.setOutlineThickness(2);
+		hitbox.setOutlineColor(sf::Color::Black);
 
 		Sbg = sf::Sprite(Tbg, sf::IntRect(0, 0, 160, 200));
 		Sbg.setPosition(sf::Vector2f(pos.x, pos.y));
 	}
-	bool Display(int space, bool isFirst = true, bool isTop = false, int chosen = -1) {
+	bool Display(int space,bool deckFirst = true, bool isFirst = true, bool isTop = false, int chosen = -1) {
 		hitbox.setFillColor(sf::Color::Black);
 		sf::Vector2f pos(space+150,850);
 		
+		if(!deckFirst)
+			pos = sf::Vector2f(space + 15, 15);
 
-
-		if (!isFirst) { 
-			pos = sf::Vector2f(space+15,15);
+		if (isFirst != deckFirst) { 
 			DrawType = 2;
 		}
 		else if (hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y) && chosen == -1) {

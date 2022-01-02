@@ -29,10 +29,16 @@ int main() {
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::Space) {
+					field.setIsFirst();
+				}
+			}
 		}
 		window.clear(sf::Color(168, 196, 255));
 
-		field.draw(window, time);
+		field.draw(window, time, event);
 
 
 

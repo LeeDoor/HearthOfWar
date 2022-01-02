@@ -14,6 +14,10 @@ public:
 
 	}
 
+	void setIsFirst() {
+		isFirst = !isFirst;
+	}
+
 
 	void startGame() {
 		firstP->startGame(true);
@@ -33,12 +37,8 @@ public:
 		else return secondP->step();
 	}
 
-	void draw(sf::RenderWindow& window, float time) {
+	void draw(sf::RenderWindow& window, float time, sf::Event& event) {
 		stepTime += time;
-		if (stepTime >= 5) {
-			//isFirst = !isFirst;
-			//stepTime = 0;
-		}
 
 		// drawing decks
 		sf::Texture Tdeck;
@@ -58,12 +58,12 @@ public:
 		int space = 0;
 		vector<Card*> toDraw;
 		int chosen = -1;
-		bool deckFirst = isFirst;
+		bool deckFirst = true; // где отображается карта сверху чи снизу
 		//first
 
 		for (int q = 0; q < 2; q++) {
 			for (int i = 0; i < size; i++) {
-				if (curDeck[i]->Display(space,deckFirst, (i == size - 1), chosen)) {
+				if (curDeck[i]->Display(space,deckFirst, isFirst, (i == size - 1), chosen)) {
 					space += 320;
 					chosen = i;
 				}
