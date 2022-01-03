@@ -2,7 +2,7 @@
 #define block
 class Creature:public Card
 {
-protected:
+private:
 	int damage; // entity's damage
 	int health; // max health
 
@@ -83,9 +83,11 @@ public:
 		this->health = card->getHealth();
 	}
 
-	void attack() {}
-	void use()    {}
-	void death () {}
+	void use(Player* currP) {
+		cout << name << " used for " << cost << "!\n";
+
+		currP->createEntity(this);
+	}
 	void viewBig(sf::Vector2f pos) {
 		Card::viewBig(pos);
 		Sdamage = sf::Sprite(Tvalue);

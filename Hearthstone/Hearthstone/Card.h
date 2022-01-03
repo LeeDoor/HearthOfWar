@@ -1,4 +1,6 @@
 #pragma once
+
+
 class Card
 {
 protected:
@@ -11,7 +13,7 @@ protected:
 	int cost;//how much does it cost
 	string type; // danger level
 	vector<string> feature; // special property
-	vector<string> funcFeat; // function of special property (func has same position as feature -- 0 id is battlecry, 0 id is battlecry(**){**})
+	vector<string> funcFeat; // function of special property (func has same position as feature -- 0 id is battlecry, 1 id is deathrattle(**){**})
 	string description; // what is this card do
 
 	bool isTaken; // i want to use it
@@ -50,18 +52,22 @@ public:
 		setTexture();
 	}
 
-	virtual int getDamage() {
-		return 0;
-	}
-
-	virtual int getHealth() {
-		return 0;
-	}
-
 	string getGameClass() {
 		return gameClass;
 	}
 
+	vector<string> getFeautre() {
+		return feature;
+	}
+	vector<string> getFuncFeat() {
+		return funcFeat;
+	}
+	string getPicPath() {
+		return picPath;
+	}
+
+	virtual int getDamage(){return -1;}
+	virtual int getHealth(){return -1;}
 	virtual void copy(Card* card) {
 		this->id = card->id;
 		this->picPath = card->picPath;
@@ -74,9 +80,6 @@ public:
 		this->gameClass = card->gameClass;
 		setTexture();
 	}
-
-
-
 	void setTexture() {
 		Tpic.loadFromFile(picPath, sf::IntRect(0, 0, 280, 180));
 		Tvalue.loadFromFile("pic\\BGvalue.png");
@@ -105,8 +108,9 @@ public:
 		hitbox = sf::RectangleShape(sf::Vector2f(160, 200));
 
 	}
-
-	virtual void use() {}
+	virtual void use(Player* currP) {
+	
+	}
 
 	virtual void viewBig(sf::Vector2f pos) {
 		hitbox = sf::RectangleShape(sf::Vector2f(320, 420));
@@ -167,7 +171,6 @@ public:
 		Sbg = sf::Sprite(Tbg, sf::IntRect(0, 0, 160, 200));
 		Sbg.setPosition(sf::Vector2f(pos.x, pos.y));
 	}
-
 	// space - free space between cards
 	// mana - mana of current player
 	// deckFirst - is this top or bottom drawing
@@ -185,7 +188,7 @@ public:
 		if (isFirst != deckFirst) { 
 			DrawType = 2;
 		}
-		else if (hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y) && chosen == false) {
+		else if (isMovedOn() && chosen == false) {
 			DrawType = 0;
 			if(isFirst)
 				pos.y -= 200;
@@ -232,6 +235,10 @@ public:
 			window.draw(Sbg);
 			break;
 		}
+	}
+
+	bool isMovedOn() {
+		return hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 	}
 };
 

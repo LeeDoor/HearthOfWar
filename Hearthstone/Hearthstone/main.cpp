@@ -1,3 +1,5 @@
+
+
 #include"includer.cpp" // including
 
 
@@ -35,6 +37,12 @@ int main() {
 					field.nextTurn();
 				}
 			}
+			if (event.type == sf::Event::MouseButtonPressed) {
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				{
+					field.useCheck();
+				}
+			}
 		}
 		window.clear(sf::Color(168, 196, 255));
 
@@ -45,10 +53,4 @@ int main() {
 		window.display();
 		
 	}
-	
-
-
-
-	/*
-	*/
 }

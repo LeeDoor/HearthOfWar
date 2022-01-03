@@ -45,7 +45,9 @@ public:
 	void copy(Card* card) {
 		Card::copy(card);
 	}
-	void use() {}
+	void use() {
+		cout << name << " used!\n";
+	}
 
 	void viewBig(sf::Vector2f pos) {
 		Card::viewBig(pos);
