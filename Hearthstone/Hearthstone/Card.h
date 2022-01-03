@@ -1,5 +1,7 @@
 #pragma once
 
+#include"includer.h"
+class Player;
 
 class Card
 {
@@ -38,36 +40,24 @@ protected:
 	sf::RectangleShape hitbox;
 	
 public:
-	Card() { setTexture(); }
-	Card(Card* card):
-		id			(card->id),
-		picPath		(card->picPath),
-		name		(card->name),
-		cost		(card->cost),
-		type		(card->type),
-		feature		(card->feature),
-		funcFeat	(card->funcFeat),
-		description(card->description)
-	{
-		setTexture();
-	}
+	Card();
+	Card(Card* card);
 
-	string getGameClass() {
-		return gameClass;
-	}
+	string getGameClass();
 
-	vector<string> getFeautre() {
-		return feature;
-	}
-	vector<string> getFuncFeat() {
-		return funcFeat;
-	}
-	string getPicPath() {
-		return picPath;
-	}
+	vector<string> getFeautre();
+	vector<string> getFuncFeat();
+	string getPicPath();
 
-	virtual int getDamage(){return -1;}
-	virtual int getHealth(){return -1;}
+	void viewLow(sf::Vector2f pos, bool isTop = false);
+	void viewBack(sf::Vector2f pos, bool isTop = false);
+	
+	void Display(int& space, int mana, bool& chosen, bool deckFirst = true, bool isFirst = true, bool isTop = false);
+
+	bool isMovedOn();
+
+	virtual int getDamage() { return -1; }
+	virtual int getHealth() { return -1; }
 	virtual void copy(Card* card) {
 		this->id = card->id;
 		this->picPath = card->picPath;
@@ -109,9 +99,8 @@ public:
 
 	}
 	virtual void use(Player* currP) {
-	
-	}
 
+	}
 	virtual void viewBig(sf::Vector2f pos) {
 		hitbox = sf::RectangleShape(sf::Vector2f(320, 420));
 		hitbox.setPosition(pos);
@@ -131,7 +120,7 @@ public:
 		Tdesc.setFont(font);
 		Tdesc.setString(description);
 		Tdesc.setCharacterSize(14);
-		Tdesc.setPosition(sf::Vector2f(pos.x+20, pos.y+275));
+		Tdesc.setPosition(sf::Vector2f(pos.x + 20, pos.y + 275));
 		Tdesc.setFillColor(sf::Color::Black);
 
 		Scost = sf::Sprite(Tvalue);
@@ -142,80 +131,6 @@ public:
 		Tcost.setCharacterSize(50);
 		Tcost.setPosition(sf::Vector2f(pos.x + 20, pos.y));
 		Tcost.setFillColor(sf::Color::Blue);
-	}
-	void viewLow(sf::Vector2f pos, bool isTop = false) {
-		if(isTop == false)
-			hitbox = sf::RectangleShape(sf::Vector2f(80, 200));
-		else {
-			
-			hitbox = sf::RectangleShape(sf::Vector2f(160, 200));
-			hitbox.setFillColor(sf::Color(0,0,0,50));
-		}
-		hitbox.setPosition(pos);
-
-		Spic = sf::Sprite(Tpic, sf::IntRect(60, 0, 160, 200));
-		Spic.setPosition(sf::Vector2f(pos.x, pos.y));
-	}
-	void viewBack(sf::Vector2f pos, bool isTop = false) {
-		if (isTop == false)
-			hitbox = sf::RectangleShape(sf::Vector2f(80, 200));
-		else {
-
-			hitbox = sf::RectangleShape(sf::Vector2f(160, 200));
-			hitbox.setFillColor(sf::Color(0, 0, 0, 50));
-		}
-		hitbox.setPosition(pos);
-		hitbox.setOutlineThickness(2);
-		hitbox.setOutlineColor(sf::Color::Black);
-
-		Sbg = sf::Sprite(Tbg, sf::IntRect(0, 0, 160, 200));
-		Sbg.setPosition(sf::Vector2f(pos.x, pos.y));
-	}
-	// space - free space between cards
-	// mana - mana of current player
-	// deckFirst - is this top or bottom drawing
-	// isFirst - is first playing
-	// isTop - is it last card in the hand(needed for making correct hitbox sizes of card)
-	// chosen
-	void Display(int& space,int mana, bool& chosen, bool deckFirst = true, bool isFirst = true, bool isTop = false) {
-		
-		hitbox.setFillColor(sf::Color::Black);
-		sf::Vector2f pos(space+150,850);
-		
-		if(!deckFirst)
-			pos = sf::Vector2f(space + 15, 15);
-
-		if (isFirst != deckFirst) { 
-			DrawType = 2;
-		}
-		else if (isMovedOn() && chosen == false) {
-			DrawType = 0;
-			if(isFirst)
-				pos.y -= 200;
-		}
-		else {
-			DrawType = 1;
-		}
-
-		switch (DrawType) {
-		case 0:
-			viewBig(pos);
-			space += 320;
-			chosen = true;
-			break;
-		case 1:
-			viewLow(pos, isTop);
-			space += 80;
-			break;
-
-		case 2:
-			space += 80;
-			viewBack(pos, isTop);
-		}
-		if (cost <= mana && DrawType != 2 ) {
-			hitbox.setOutlineThickness(8);
-			hitbox.setOutlineColor(sf::Color::Green);
-		}
 	}
 	virtual void drawCard(sf::RenderWindow& window) {
 		window.draw(hitbox);
@@ -237,8 +152,5 @@ public:
 		}
 	}
 
-	bool isMovedOn() {
-		return hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
-	}
 };
 

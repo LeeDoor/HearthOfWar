@@ -1,7 +1,21 @@
+class Deck;
+class Player;
+class Card;
+class Creature;
+class Entity;
+class Event;
+class CDB;
+class Field;
 
+#include"includer.h"
 
-#include"includer.cpp" // including
-
+#include "Card.h"	// card
+#include "Creature.h" // entity, creature
+#include "Event.h" // Millitary Forces
+#include "Deck.h"	// many cards
+#include "Player.h"	// player
+#include "Field.h"	// gaming field
+#include "CDB.h"	// card data base
 
 int main() {
 	srand(time(NULL));
