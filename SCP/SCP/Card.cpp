@@ -9,7 +9,13 @@ extern sf::Vector2f DECK_POS2;
 extern sf::Vector2f HAND_POS1;
 extern sf::Vector2f HAND_POS2;
 
-Card::Card() { }
+Card::Card() {
+	this->isTargetable = false;
+	this->isInitiator = true;
+}
+Card::~Card() {
+
+}
 
 Card::Card(Card* card) :
 	id(card->id),
@@ -24,8 +30,6 @@ Card::Card(Card* card) :
 	setTexture();
 }
 
-int Card::getDamage() { return -1; }
-int Card::getHealth() { return -1; }
 string Card::getGameClass() {
 	return gameClass;
 }
@@ -111,7 +115,8 @@ void Card::viewBig() {
 // isFirst - is first playing
 // isTop - is it last card in the hand(needed for making correct hitbox sizes of card)
 // chosen - is there any picked cards
-void Card::Display(int& space, float time, int mana, bool& chosen, bool deckFirst, bool isFirst, bool isTop) { // function decides which type of drawing we will be using
+// target - if this object equals target, border is yellow to show it.
+void Card::Display(int& space, float time, int mana, bool& chosen, bool deckFirst, bool isFirst, bool isTop, Clickable* initiator) { // function decides which type of drawing we will be using
 	if(animation.animationType == "takeCard")
 	{
 		AnimationTakeCard(isFirst,time);
@@ -152,16 +157,17 @@ void Card::Display(int& space, float time, int mana, bool& chosen, bool deckFirs
 			space += 80;
 			viewBack(isTop);
 		}
-		if (cost <= mana && DrawType != 2) {
+		if (this == initiator) {
+			hitbox.setOutlineThickness(8);
+			hitbox.setOutlineColor(sf::Color::Yellow);
+		}
+		else if (cost <= mana && DrawType != 2) {
 			hitbox.setOutlineThickness(8);
 			hitbox.setOutlineColor(sf::Color::Green);
 		}
 	}
 }
 
-bool Card::isMovedOn() { // is cursor on a card
-	return hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
-}
 
 void Card::copy(Card* card) {
 	this->id = card->id;
@@ -201,9 +207,6 @@ void Card::setTexture() {
 	}
 
 	hitbox = sf::RectangleShape(sf::Vector2f(160, 200));
-
-}
-void Card::use(Player* currP) {
 
 }
 void Card::drawCard(sf::RenderWindow& window, int DrawType) {
@@ -256,3 +259,4 @@ void Card::AnimationTakeCard(bool isFirst, float timeLeft) {
 	}
 	
 }
+

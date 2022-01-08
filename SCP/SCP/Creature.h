@@ -9,6 +9,7 @@ class Creature :public Card
 private:
 	int damage; // entity's damage
 	int health; // max health
+	bool isCard = true; // is it a card or an entity
 
 	sf::Text Tdamage;
 	sf::Text Thealth;
@@ -45,17 +46,21 @@ public:
 
 
 #endif
+	~Creature();
 
 	int getDamage();
 	int getHealth();
 
 	void copy(Card* card);
-
-	void use(Player* currP); 
+ 
 	void viewBig();
 	void viewLow();
-	void viewAsEntity(sf::Vector2f pos);
+	void viewAsEntity(sf::Vector2f pos, Clickable* initiator);
 
 	void drawCard(sf::RenderWindow& window, int DrawType = -1);
+
+	void use(Clickable* target, Player* player);
+	void attack(Clickable* target);
+	void acceptAttack(int damage);
 };
 

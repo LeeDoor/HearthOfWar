@@ -20,7 +20,7 @@ public:
 	
 	bool step(bool isFirst);
 	Deck* getDeck();
-	vector<Creature*> getEntities();
+	vector<Creature*>& getEntities();
 	int getCurMana();
 
 	void summonCreature(Creature* creature);

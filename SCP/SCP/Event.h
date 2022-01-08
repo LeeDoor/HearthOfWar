@@ -27,7 +27,7 @@ public:
 		int id = -1);
 
 	void copy(Card* card);
-	void use();
+	void use(Clickable* target, Player* player);
 
 	void viewBig();
 	void viewLow();

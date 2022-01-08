@@ -2,10 +2,10 @@
 
 #include"includer.h"
 #include "Animation.h"
+#include "Clickable.h"
 class Player;
 
-class Card
-{
+class Card :public Clickable {
 protected:
 
 	int id; // special id of a card
@@ -18,6 +18,7 @@ protected:
 	vector<string> feature; // special property
 	vector<string> funcFeat; // function of special property (func has same position as feature -- 0 id is battlecry, 1 id is deathrattle(**){**})
 	string description; // what is this card do
+	vector<string> targets; //class Classname. need to accepting attack to other objects
 
 	bool isTaken; // i want to use it
 	bool isChoosen;// i want to see what does it do
@@ -39,13 +40,13 @@ protected:
 	sf::Text Tcost;
 
 	int DrawType; // 0 - big, 1 - low, 2 - back, (3 - entity only for creature)
-	sf::RectangleShape hitbox;
 
 public:
 	static int ANIMATION_SPEED;
 
 	Card();
 	Card(Card* card);
+	~Card();
 
 	string getGameClass();
 
@@ -57,22 +58,20 @@ public:
 	void setPos(sf::Vector2f pos);
 
 	void viewLow(bool isTop = false);
-	void viewBack( bool isTop = false);
+	void viewBack(bool isTop = false);
 
-	void Display(int& space, float time, int mana, bool& chosen, bool deckFirst, bool isFirst, bool isTop);
+	void Display(int& space, float time, int mana, bool& chosen, bool deckFirst, bool isFirst, bool isTop, Clickable* initiator);
 
-	bool isMovedOn();
 
-	virtual int getDamage() ;
-	virtual int getHealth() ;
 	virtual void copy(Card* card);
 	void setTexture();
-	virtual void use(Player* currP);
 	virtual void viewBig();
 	virtual void drawCard(sf::RenderWindow& window, int DrawType = -1);
 
 	//ANIMATIONS
 	void AnimationTakeCard(bool isFirst, float timeLeft = 0);
-	
-};
 
+
+
+
+};

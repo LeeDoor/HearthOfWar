@@ -2,6 +2,8 @@
 
 #include"Event.h"
 #include"Card.h"
+#include"Clickable.h"
+#include"Player.h"
 Event::Event() {
 	
 }
@@ -25,7 +27,6 @@ Event::Event(
 	this->id = id;
 	this->picPath = picPath;
 	this->gameClass = "Event";
-
 	setTexture();
 }
 
@@ -50,9 +51,6 @@ Event::Event(
 void Event::copy(Card* card) {
 	Card::copy(card);
 }
-void Event::use() {
-	cout << name << " used!\n";
-}
 
 void Event::viewBig() {
 	Card::viewBig();
@@ -65,4 +63,22 @@ void Event::drawCard(sf::RenderWindow& window) {
 
 }
 
+
+
+void Event::use(Clickable* target, Player* player) {
+	//here we need to write an algoritm to find targetable classes 
+	if (true/*typeid(*target).name() == "class Field"*/) {
+		// special event function
+
+		//removing card from hand
+		vector<Card*> cards = player->getDeck()->getHand();
+		int size = cards.size();
+		for (int i = 0; i < size; i++) {
+			if (cards[i] == this) {
+				cards.erase(cards.begin() + i);
+				break;
+			}
+		}
+	}
+}
 

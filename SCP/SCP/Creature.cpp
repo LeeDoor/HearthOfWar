@@ -2,9 +2,14 @@
 
 #include"Creature.h"
 #include"Card.h"
+#include"Clickable.h"
 #include"Player.h"
 
+extern int MAX_ENTITY;
+
 #define block
+
+//constructs block
 #ifdef block
 Creature::Creature() { }
 Creature::Creature(
@@ -57,8 +62,16 @@ Creature::Creature(
 	this->gameClass = "Creature";
 	setTexture();
 }
+void Creature::copy(Card* card) {
+	Card::copy(card);
+	this->damage = card->getDamage();
+	this->health = card->getHealth();
+}
 #endif
 
+Creature::~Creature() {}
+
+//getters
 int Creature::getDamage() {
 	return damage;
 }
@@ -66,12 +79,7 @@ int Creature::getHealth() {
 	return health;
 }
 
-void Creature::copy(Card* card) {
-	Card::copy(card);
-	this->damage = card->getDamage();
-	this->health = card->getHealth();
-}
-
+//viewing
 void Creature::viewBig() {
 	Card::viewBig();
 	Sdamage = sf::Sprite(Tvalue);
@@ -95,7 +103,7 @@ void Creature::viewBig() {
 void Creature::viewLow() {
 	Card::viewLow();
 }
-void Creature::viewAsEntity(sf::Vector2f pos) {
+void Creature::viewAsEntity(sf::Vector2f pos, Clickable* initiator) {
 	this->pos = pos;
 
 
@@ -103,8 +111,10 @@ void Creature::viewAsEntity(sf::Vector2f pos) {
 	hitbox.setPosition(pos);
 	hitbox.setTexture(&Tpic);
 	hitbox.setOutlineThickness(6);
-	hitbox.setOutlineColor(sf::Color(145, 145, 145, 100));
+	if(this!=initiator)hitbox.setOutlineColor(sf::Color(145, 145, 145, 100));
+	else hitbox.setOutlineColor(sf::Color::Yellow);
 
+	/*
 	Scost = sf::Sprite(Tvalue);
 	Scost.setScale(0.5,0.5);
 	Scost.setPosition(pos);
@@ -114,6 +124,7 @@ void Creature::viewAsEntity(sf::Vector2f pos) {
 	Tcost.setCharacterSize(25);
 	Tcost.setPosition(sf::Vector2f(pos.x+5, pos.y));
 	Tcost.setFillColor(sf::Color::Blue);
+	*/
 
 	Sdamage = sf::Sprite(Tvalue);
 	Sdamage.setScale(0.5, 0.5);
@@ -135,29 +146,11 @@ void Creature::viewAsEntity(sf::Vector2f pos) {
 	Thealth.setPosition(sf::Vector2f(pos.x + 135, pos.y + 130));
 	Thealth.setFillColor(sf::Color::Green);
 
+
 	DrawType = 3;
 }
-
-
-void Creature::use(Player* currP) {
-	cout << "AAAAAAAAAAAAAAA";
-
-	Creature* buff = new Creature;
-	buff->copy(this);
-	currP->summonCreature(buff);
-
-	vector<Card*>& curDeck = currP->getDeck()->getHand();
-	int size = curDeck.size();
-	for (int i = 0; i < size; i++) {
-		if (curDeck[i]->getId() == this->id) {
-			curDeck.erase(curDeck.begin() + i);
-			break;
-		}
-	}
-}
-
 void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
-	Card::drawCard(window,DrawType);
+	Card::drawCard(window, DrawType);
 	if (DrawType == 0) {
 		window.draw(Sdamage);
 		window.draw(Tdamage);
@@ -166,13 +159,53 @@ void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
 	}
 	else if (DrawType == 3) {
 		hitbox.setFillColor(sf::Color::White);
-		window.draw(hitbox);
+		//window.draw(hitbox);
 		window.draw(Scost);
 		window.draw(Tcost);
 
+		window.draw(hitbox);
 		window.draw(Sdamage);
 		window.draw(Tdamage);
 		window.draw(Shealth);
 		window.draw(Thealth);
 	}
+}
+
+//activity
+void Creature::use(Clickable* target, Player* player) {
+	if (isCard/* && typeid(*target).name() == "class Field"*/) {
+		//summoning creature for our player
+		player->summonCreature(this);
+
+		//removing card from hand
+		vector<Card*>& cards = player->getDeck()->getHand();
+		int size = cards.size();
+		for (int i = 0; i < size; i++) {
+			if (cards[i] == this) {
+				cards.erase(cards.begin()+i);
+				break;
+			}
+		}
+		isCard = false;
+		isTargetable = true;
+	}
+	else {
+		attack(target);
+	}
+}
+
+void Creature::attack(Clickable* target) {
+	//if (/*typeid(*target).name() == "class Creature"*/) {
+	target->acceptAttack(this->damage);
+	this->health -= target->getDamage();
+	//}
+	/* function for character
+	else if (typeid(*target).name() == "class Character") {
+		target->acceptAttack(this->damage);
+	}
+	*/
+}
+void Creature::acceptAttack(int damage){
+	//if(!isCard)
+	this->health -= damage;
 }

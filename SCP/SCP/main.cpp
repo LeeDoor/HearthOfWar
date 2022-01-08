@@ -12,7 +12,9 @@ sf::Vector2f DECK_POS1(1627, 600);
 sf::Vector2f DECK_POS2(1627, 330);
 sf::Vector2f HAND_POS1(150, 850);
 sf::Vector2f HAND_POS2(15, 15);
+int MAX_ENTITY = 5;
 
+#include "Clickable.h"	// card data base
 #include "Card.h"	// card
 #include "Creature.h" // entity, creature
 #include "Event.h" // Millitary Forces
@@ -25,7 +27,6 @@ sf::Vector2f HAND_POS2(15, 15);
 
 int main() {
 	srand(time(NULL));
-	setlocale(LC_ALL, "Russian");
 
 	sf::Clock clock;
 
@@ -39,7 +40,9 @@ int main() {
 	Player* secondPlayer = new Player(secondDeck);
 
 	Field field(firstPlayer, secondPlayer);
-
+	
+	Clickable* initiator = nullptr; // we are saving initiator of some event
+	Clickable* buff; // needs to check variables of initiator to accept it
 
 	float time;
 	while (window.isOpen()) {
@@ -61,14 +64,34 @@ int main() {
 			if (event.type == sf::Event::MouseButtonPressed) {
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
-					field.useCheck();
+					buff = field.useCheck(event);
+					if (buff != nullptr) {
+						if (initiator == nullptr) {
+							if (buff->getIsInitiator())
+								cout << "waiting for target\n";
+								initiator = buff;
+						}
+						else  {
+							if (buff->getIsTargetable()) {
+								cout << "attack!\n";
+								initiator->use(buff, field.getCurPlayer());
+								initiator = nullptr;
+								buff = nullptr;
+							}
+							else {
+								cout << "didnt attack, finding new initiator\n";
+								initiator = nullptr;
+							}
+						}
+					}
 				}
 			}
 		}
 		window.clear(sf::Color(168, 196, 255));
 
 		if (field.getIsStarted()) {
-			field.draw(window, time, event);
+			field.deathCheck();////////////////////////////////////////
+			field.draw(window, time, initiator);
 		}
 
 

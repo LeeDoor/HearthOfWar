@@ -18,7 +18,7 @@ bool Player::step(bool isFirst) {
 Deck* Player::getDeck() {
 	return deck;
 }
-vector<Creature*> Player::getEntities() {
+vector<Creature*> &Player::getEntities() {
 	return entities;
 }
 int Player::getCurMana() {
