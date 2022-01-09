@@ -1,6 +1,6 @@
 #pragma once
-#include"Field.h"
-#include"Player.h"
+#include"headers\\Field.h"
+#include"headers\\Player.h"
 
 
 extern sf::Vector2f DECK_POS1;

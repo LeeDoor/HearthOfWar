@@ -1,9 +1,9 @@
 #pragma once
 
-#include"Deck.h"
-#include"Creature.h"
-#include"Event.h"
-#include"CDB.h"
+#include"headers\\Deck.h"
+#include"headers\\Creature.h"
+#include"headers\\Event.h"
+#include"headers\\CDB.h"
 void Deck::fillHand(bool isFirst) {
 	int size;
 	if (isFirst)

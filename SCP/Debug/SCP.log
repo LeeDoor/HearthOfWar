@@ -81,7 +81,6 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(238,67): warning C4244: аргуме�
           [
               T=float
           ]
-  getTarget.cpp
   main.cpp
 D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(34,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
 D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(57,40): warning C4244: =: преобразование "sf::Int32" в "float", возможна потеря данных

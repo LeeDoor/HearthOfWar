@@ -1,9 +1,9 @@
 #pragma once
 
-#include"Event.h"
-#include"Card.h"
-#include"Clickable.h"
-#include"Player.h"
+#include"headers\\Event.h"
+#include"headers\\Card.h"
+#include"headers\\Clickable.h"
+#include"headers\\Player.h"
 Event::Event() {
 	
 }

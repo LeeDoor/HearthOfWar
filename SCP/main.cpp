@@ -7,21 +7,21 @@ class Event;
 class CDB;
 class Field;
 
-#include"includer.h"
+#include"headers\\includer.h"
 sf::Vector2f DECK_POS1(1627, 600);
 sf::Vector2f DECK_POS2(1627, 330);
 sf::Vector2f HAND_POS1(150, 850);
 sf::Vector2f HAND_POS2(15, 15);
 int MAX_ENTITY = 5;
 
-#include "Clickable.h"	// card data base
-#include "Card.h"	// card
-#include "Creature.h" // entity, creature
-#include "Event.h" // Millitary Forces
-#include "Deck.h"	// many cards
-#include "Player.h"	// player
-#include "Field.h"	// gaming field
-#include "CDB.h"	// card data base
+#include "headers\\Clickable.h"	// card data base
+#include "headers\\Card.h"	// card
+#include "headers\\Creature.h" // entity, creature
+#include "headers\\Event.h" // Millitary Forces
+#include "headers\\Deck.h"	// many cards
+#include "headers\\Player.h"	// player
+#include "headers\\Field.h"	// gaming field
+#include "headers\\CDB.h"	// card data base
 
 void setDefaultToClick(Clickable*& initiator, vector<int>& targets) {
 	initiator = nullptr;

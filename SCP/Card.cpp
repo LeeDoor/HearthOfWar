@@ -1,6 +1,6 @@
 #pragma once
-#include"Card.h"
-#include"Animation.h"
+#include"headers\\Card.h"
+#include"headers\\Animation.h"
 
 int::Card::ANIMATION_SPEED = 20;
 extern sf::Vector2f DECK_POS1;

@@ -1,9 +1,9 @@
 #pragma once
 
-#include"Creature.h"
-#include"Card.h"
-#include"Clickable.h"
-#include"Player.h"
+#include"headers\\Creature.h"
+#include"headers\\Card.h"
+#include"headers\\Clickable.h"
+#include"headers\\Player.h"
 
 extern int MAX_ENTITY;
 

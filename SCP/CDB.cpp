@@ -1,8 +1,8 @@
 #pragma once
 #define block
-#include"CDB.h"
-#include"Creature.h"
-#include"Event.h"
+#include"headers\\CDB.h"
+#include"headers\\Creature.h"
+#include"headers\\Event.h"
 CDB::CDB() {
 	addAll();
 
