@@ -22,6 +22,7 @@ public:
 	Deck* getDeck();
 	vector<Creature*>& getEntities();
 	int getCurMana();
+	void minusCurMana(int cost);
 
 	void summonCreature(Creature* creature);
 };

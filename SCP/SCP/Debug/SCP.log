@@ -1,11 +1,11 @@
 ﻿  Animation.cpp
   Card.cpp
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Card.cpp(129,29): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Card.cpp(130,29): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Card.cpp(131,29): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Card.cpp(132,29): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
@@ -13,7 +13,7 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Card.cpp(131,29): warning C4244: аргумен
   CDB.cpp
 D:\prjts\c++\HEARTHOFWAR\SCP\SCP\CDB.cpp(15,9): warning C4018: >=: несоответствие типов со знаком и без знака
   Clickable.cpp
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Clickable.cpp(16,95): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Clickable.cpp(19,95): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -22,7 +22,7 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Clickable.cpp(16,95): warning C4244: аргум
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Clickable.cpp(16,67): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Clickable.cpp(19,67): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -35,7 +35,7 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Clickable.cpp(16,67): warning C4244: аргум
   Deck.cpp
   Event.cpp
   Field.cpp
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(49,92): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(58,92): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -44,7 +44,7 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(49,92): warning C4244: аргумен
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(49,64): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(58,64): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -53,17 +53,17 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(49,64): warning C4244: аргумен
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(115,73): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(169,73): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(115,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(169,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
           with
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(184,95): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(238,95): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -72,7 +72,7 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(184,95): warning C4244: аргуме�
           [
               T=float
           ]
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(184,67): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(238,67): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
           with
           [
               T=int
@@ -83,8 +83,10 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(184,67): warning C4244: аргуме�
           ]
   getTarget.cpp
   main.cpp
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(29,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(49,40): warning C4244: =: преобразование "sf::Int32" в "float", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(34,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(57,40): warning C4244: =: преобразование "sf::Int32" в "float", возможна потеря данных
   Player.cpp
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Player.cpp(36,21): warning C4018: <: несоответствие типов со знаком и без знака
   Создание кода...
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(108): warning C4715: Field::useCheck: значение возвращается не при всех путях выполнения
   SCP.vcxproj -> D:\prjts\c++\HEARTHOFWAR\SCP\Debug\SCP.exe

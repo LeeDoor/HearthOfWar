@@ -16,7 +16,12 @@ private:
 public:
 	Field(Player* secondP, Player* firstP);
 
-	Clickable* useCheck(sf::Event event);
+	Clickable* useCheck(vector<int>targets);
+	Clickable* useCheckEntities(bool isFirst);
+	Clickable* useCheckHands(bool isFirst);
+	Clickable* useCheckField();
+	//Clickable* useCheckHeroes(bool isFirst);
+
 	void startGame();
 	bool nextTurn();
 	void draw(sf::RenderWindow& window, float time, Clickable* initiator);

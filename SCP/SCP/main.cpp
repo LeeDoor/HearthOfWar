@@ -23,6 +23,11 @@ int MAX_ENTITY = 5;
 #include "Field.h"	// gaming field
 #include "CDB.h"	// card data base
 
+void setDefaultToClick(Clickable*& initiator, vector<int>& targets) {
+	initiator = nullptr;
+	targets = vector<int>{ 0,2 };
+}
+
 
 
 int main() {
@@ -43,6 +48,9 @@ int main() {
 	
 	Clickable* initiator = nullptr; // we are saving initiator of some event
 	Clickable* buff; // needs to check variables of initiator to accept it
+	vector<int> targets; // where we will look for a target or an initiator
+
+	setDefaultToClick(initiator, targets);
 
 	float time;
 	while (window.isOpen()) {
@@ -64,26 +72,25 @@ int main() {
 			if (event.type == sf::Event::MouseButtonPressed) {
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
-					buff = field.useCheck(event);
+					buff = field.useCheck(targets);
 					if (buff != nullptr) {
 						if (initiator == nullptr) {
-							if (buff->getIsInitiator())
-								cout << "waiting for target\n";
+							if (buff->getIsInitiator()) {
 								initiator = buff;
+								targets = initiator->getTargets();
+							}
 						}
 						else  {
 							if (buff->getIsTargetable()) {
-								cout << "attack!\n";
 								initiator->use(buff, field.getCurPlayer());
-								initiator = nullptr;
 								buff = nullptr;
-							}
-							else {
-								cout << "didnt attack, finding new initiator\n";
-								initiator = nullptr;
+								setDefaultToClick(initiator, targets);
 							}
 						}
 					}
+				}
+				else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+					setDefaultToClick(initiator, targets);
 				}
 			}
 		}

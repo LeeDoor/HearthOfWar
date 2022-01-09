@@ -18,39 +18,93 @@ Field::Field(Player* secondP, Player* firstP) {
 	hitbox.setFillColor(sf::Color(246, 255, 0,50));
 }
 
-Clickable* Field::useCheck(sf::Event event) {
-	//checking cards in hands
+Clickable* Field::useCheckEntities(bool isFirst) {
+	//check for entities
+	int size;
+	vector<Creature*> entities;
+	if(isFirst)
+		entities = firstP->getEntities();
+	else
+		entities = secondP->getEntities();
+
+	size = entities.size();
+	for (int j = 0; j < size; j++) {
+		if (entities[j]->isMovedOn()) {
+			return entities[j];
+		}
+	}
+	return nullptr;
+}
+Clickable* Field::useCheckHands(bool isFirst) {
+	//checking cards's hitbox in hands
 	int size;
 	vector<Card*> curDeck;
-	curDeck = firstP->getDeck()->getHand();
-	for (int i = 0; i < 2; i++) {
-		size = curDeck.size();
-		for (int j = 0; j < size; j++) {
-			if (curDeck[j]->isMovedOn()) {
-				return curDeck[j];
-			}
-		}
+	if(isFirst)
+		curDeck = firstP->getDeck()->getHand();
+	else 
 		curDeck = secondP->getDeck()->getHand();
-	}
 
-	//check for entities
-	vector<Creature*> entities = firstP->getEntities();
-	for (int i = 0; i < 2; i++) {
-		size = entities.size();
-		for (int j = 0; j < size; j++) {
-			if (entities[j]->isMovedOn()) {
-				return entities[j];
-			}
+	size = curDeck.size();
+	for (int j = 0; j < size; j++) {
+		if (curDeck[j]->isMovedOn()) {
+			return curDeck[j];
 		}
-		entities = secondP->getEntities();
 	}
-	
+	return nullptr;
+}
+
+Clickable* Field::useCheckField() {
 	//checking field press
 	if (hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y)) {
 		return this;
 	}
-
 	return nullptr;
+}
+//i need to fix bug then i can use enemie's entities. i send to useCheck func
+//vector of targets like "123456" to see
+//which targets will i check. then i choose an initiator, defaults are ally
+//entities and hand. then i already have it, i am getting targets from initiator.
+Clickable* Field::useCheck(vector<int>targets) {
+	int size = targets.size();
+	Clickable* buff;
+	for (int i = 0; i < size; i++) {
+		switch (targets[i]) {
+		case 0:
+			buff = useCheckEntities(!(isFirst^true));
+			if (buff != nullptr)
+				return buff;
+			break;
+		case 1:
+			buff = useCheckEntities(!(isFirst ^ false));
+			if (buff != nullptr)
+				return buff;
+			break;
+		case 2:
+			buff = useCheckHands(!(isFirst ^ true));
+			if (buff != nullptr)
+				return buff;
+			break;
+		case 3:
+			buff = useCheckHands(!(isFirst ^ false));
+			if (buff != nullptr)
+				return buff;
+			break;
+		case 4:
+			buff = useCheckField(); 
+			if (buff != nullptr)
+				return buff;
+			break;
+		/*
+		case 5:
+			break;
+		case 6:
+			break;
+		*/
+		default:
+			cout << "\n\nFIELD.CPP ERROR: WRONG TYPE OF TARGET\n\n";
+		}
+	}
+
 }
 void Field::startGame() {
 	firstP->startGame(true);

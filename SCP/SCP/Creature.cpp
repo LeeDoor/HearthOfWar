@@ -159,10 +159,10 @@ void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
 	}
 	else if (DrawType == 3) {
 		hitbox.setFillColor(sf::Color::White);
-		//window.draw(hitbox);
+		/*
 		window.draw(Scost);
 		window.draw(Tcost);
-
+		*/
 		window.draw(hitbox);
 		window.draw(Sdamage);
 		window.draw(Tdamage);
@@ -174,20 +174,24 @@ void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
 //activity
 void Creature::use(Clickable* target, Player* player) {
 	if (isCard/* && typeid(*target).name() == "class Field"*/) {
-		//summoning creature for our player
-		player->summonCreature(this);
+		if (player->getCurMana() >= cost) {
+			player->minusCurMana(cost);
+			//summoning creature for our player
+			player->summonCreature(this);
 
-		//removing card from hand
-		vector<Card*>& cards = player->getDeck()->getHand();
-		int size = cards.size();
-		for (int i = 0; i < size; i++) {
-			if (cards[i] == this) {
-				cards.erase(cards.begin()+i);
-				break;
+			//removing card from hand
+			vector<Card*>& cards = player->getDeck()->getHand();
+			int size = cards.size();
+			for (int i = 0; i < size; i++) {
+				if (cards[i] == this) {
+					cards.erase(cards.begin() + i);
+					break;
+				}
 			}
+			isCard = false;
+			isTargetable = true;
+			targets = vector<int>{ 1/*,6*/ };
 		}
-		isCard = false;
-		isTargetable = true;
 	}
 	else {
 		attack(target);

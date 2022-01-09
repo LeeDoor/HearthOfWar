@@ -18,7 +18,8 @@ protected:
 	vector<string> feature; // special property
 	vector<string> funcFeat; // function of special property (func has same position as feature -- 0 id is battlecry, 1 id is deathrattle(**){**})
 	string description; // what is this card do
-	vector<string> targets; //class Classname. need to accepting attack to other objects
+
+	
 
 	bool isTaken; // i want to use it
 	bool isChoosen;// i want to see what does it do

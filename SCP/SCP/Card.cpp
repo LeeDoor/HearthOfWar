@@ -12,6 +12,7 @@ extern sf::Vector2f HAND_POS2;
 Card::Card() {
 	this->isTargetable = false;
 	this->isInitiator = true;
+	this->targets = vector<int>{4};
 }
 Card::~Card() {
 
