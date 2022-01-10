@@ -16,6 +16,8 @@ class Field;
 #include "headers\\Player.h"	// player
 #include "headers\\Field.h"	// gaming field
 #include "headers\\CDB.h"	// card data base
+#include "headers\\Screen.h"// screens of the game
+#include "headers\\Button.h"	// pressable buttons
 
 sf::Vector2f DECK_POS1(1627, 600);
 sf::Vector2f DECK_POS2(1627, 330);
@@ -28,7 +30,6 @@ void setDefaultToClick(Clickable*& initiator, vector<int>& targets) {
 	initiator = nullptr;
 	targets = vector<int>{ 0,2 };
 }
-
 void drawWinScreen(sf::RenderWindow& window, Player* player) {
 
 	// setting "you won" text
@@ -63,7 +64,9 @@ void drawWinScreen(sf::RenderWindow& window, Player* player) {
 	player->getPerson()->draw(window,false);
 }
 
-
+void helloWorld() {
+	cout << "i am retard";
+}
 
 int main() {
 	srand(time(NULL));
@@ -74,18 +77,17 @@ int main() {
 
 	CDB* cardDB = new CDB;
 
-	Deck* firstDeck = new Deck(cardDB, window);
-	Deck* secondDeck = new Deck(cardDB, window);
-	Player* firstPlayer = new Player(firstDeck);
-	Player* secondPlayer = new Player(secondDeck);
+	Screen screen(cardDB);
 
-	Field field(firstPlayer, secondPlayer);
+	Field* field = screen.getField();
 	
 	Clickable* initiator = nullptr; // we are saving initiator of some event
 	Clickable* buff; // needs to check variables of initiator to accept it
 	vector<int> targets; // where we will look for a target or an initiator
 
 	setDefaultToClick(initiator, targets);
+
+	
 
 	float time;
 	Player* winStatus;
@@ -95,60 +97,21 @@ int main() {
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
+			if (event.type == sf::Event::Closed || !screen.getIsOpened())
+				screen.CloseGame(window);
 
-			if (event.type == sf::Event::KeyPressed) {
-				if (event.key.code == sf::Keyboard::Space) {
-					field.nextTurn();
-					setDefaultToClick(initiator, targets);
-				}
-				if (event.key.code == sf::Keyboard::LAlt) {
-					field.startGame();
-				}
-			}
-			if (event.type == sf::Event::MouseButtonPressed) {
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-				{
-					if (field.getIsStarted()) {
-						buff = field.useCheck(targets);
-						if (buff != nullptr) {
-							if (initiator == nullptr) {
-								if (buff->getIsInitiator()) {
-									initiator = buff;
-									targets = initiator->getTargets();
-								}
-							}
-							else {
-								if (buff->getIsTargetable()) {
-									initiator->use(buff, field.getCurPlayer());
-									buff = nullptr;
-									setDefaultToClick(initiator, targets);
-								}
-							}
-						}
-					}
-				}
-				else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-					if (field.getIsStarted()) {
-						setDefaultToClick(initiator, targets);
-					}
-				}
-			}
+			screen.playEvent(event);
 		}
-		
-		
-		if (field.getIsStarted()) {
-			window.clear(sf::Color(168, 196, 255));
-			field.draw(window, time, initiator);
-			winStatus = field.deathCheck();
-			if (winStatus != nullptr) {
-				drawWinScreen(window, winStatus);
-			}
-
-			window.display();
-		}
-
+		screen.draw(window,time,initiator);
+		window.display();
 
 	}
 }
+
+/*
+@toEnd
+make the winScreen showing
+fix: targeted cards and entities doent mark with yellow
+
+
+*/

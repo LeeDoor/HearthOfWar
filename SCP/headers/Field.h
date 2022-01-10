@@ -26,7 +26,7 @@ public:
 
 	void startGame();
 	bool nextTurn();
-	void draw(sf::RenderWindow& window, float time, Clickable* initiator);
+	void draw(sf::RenderWindow& window, float time, Clickable* initiator = nullptr);
 
 	bool getIsStarted();
 	Player* getCurPlayer();

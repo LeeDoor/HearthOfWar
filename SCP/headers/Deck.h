@@ -23,14 +23,14 @@ private:
 public:
 	Card* operator[](int id);
 
-	Deck(CDB* cdb, sf::RenderWindow& window);
+	Deck(CDB* cdb);
 
 	vector<Card*> getDeck();
 	vector<Card*> getLeft();
 	vector<Card*>& getHand();
 
 	void takeCard(bool isFirst);
-	void createDeck(sf::RenderWindow& window);
+	void createDeck();
 	void clear();
 	void startGame(bool isFirst);
 };

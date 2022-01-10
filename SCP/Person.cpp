@@ -1,4 +1,4 @@
-#include "Person.h"
+#include "headers\\Person.h"
 
 Person::Person(bool isFirst) {
 	this->isFirst = isFirst;

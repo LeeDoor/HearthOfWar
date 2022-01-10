@@ -60,9 +60,9 @@ Card* Deck::operator[](int id) {
 	return deck[id];
 }
 
-Deck::Deck(CDB* cdb, sf::RenderWindow& window) {
+Deck::Deck(CDB* cdb) {
 	curDB = cdb;
-	createDeck(window);
+	createDeck();
 }
 
 vector<Card*>  Deck::getDeck() {
@@ -76,7 +76,7 @@ vector<Card*>&  Deck::getHand() {
 }
 
 
-void  Deck::createDeck(sf::RenderWindow& window) {
+void  Deck::createDeck() {
 	clear();
 
 	int a;
