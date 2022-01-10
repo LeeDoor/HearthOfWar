@@ -7,19 +7,34 @@ extern int MAX_ENTITY;
 Player::Player(Deck* deck) {
 	this->deck = deck;
 }
+
+Deck* Player::getDeck() {
+	return deck;
+}
+
+Person* Player::getPerson() {
+	return person;
+}
+bool Player::getIsFirst() {
+	return isFirst;
+}
+
+
 void Player::startGame(bool isFirst) {
+	this->isFirst = isFirst;
 	deck->startGame(isFirst);
+	person = new Person(isFirst);
+	person->prepare();
 	mana = 0;
 	curMana = mana;
+
+	entities.clear();
 }
 bool Player::step(bool isFirst) {
 	mana++;
 	curMana = mana;
 	deck->takeCard(isFirst);
 	return (true);
-}
-Deck* Player::getDeck() {
-	return deck;
 }
 vector<Creature*> &Player::getEntities() {
 	return entities;

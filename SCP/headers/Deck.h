@@ -11,7 +11,6 @@ private:
 	vector<Card*> left;
 	vector<Card*> hand;
 	CDB* curDB;
-	const int DECK_SIZE = 10;
 
 
 	void fillHand(bool isFirst);

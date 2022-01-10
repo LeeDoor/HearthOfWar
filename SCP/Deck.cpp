@@ -4,12 +4,16 @@
 #include"headers\\Creature.h"
 #include"headers\\Event.h"
 #include"headers\\CDB.h"
+
+const int MAX_HAND_SIZE = 8;
+const int DECK_SIZE = 30;
+
 void Deck::fillHand(bool isFirst) {
 	int size;
 	if (isFirst)
-		size = 1; // how many cards will be given to a first player
+		size = 2; // how many cards will be given to a first player
 	else
-		size = 1; // how many cards will be given to a second player
+		size = 3; // how many cards will be given to a second player
 
 
 	for (int i = 0; i < size; i++) {
@@ -33,7 +37,7 @@ void Deck::addCard(int id) { // adds card to deck
 	}
 }
 void Deck::takeCard(bool isFirst) {
-	if (left.size() >= 1) {
+	if (left.size() >= 1 && hand.size()<MAX_HAND_SIZE) {
 		hand.push_back(left[left.size() - 1]);
 		hand[hand.size() - 1]->AnimationTakeCard(isFirst);
 		left.pop_back();

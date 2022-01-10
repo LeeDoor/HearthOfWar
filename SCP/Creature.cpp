@@ -174,7 +174,7 @@ void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
 //activity
 void Creature::use(Clickable* target, Player* player) {
 	if (isCard/* && typeid(*target).name() == "class Field"*/) {
-		if (player->getCurMana() >= cost) {
+		if (player->getCurMana() >= cost && player->getEntities().size() < MAX_ENTITY) {
 			player->minusCurMana(cost);
 			//summoning creature for our player
 			player->summonCreature(this);
@@ -190,7 +190,7 @@ void Creature::use(Clickable* target, Player* player) {
 			}
 			isCard = false;
 			isTargetable = true;
-			targets = vector<int>{ 1/*,6*/ };
+			targets = vector<int>{ 1,6 };
 		}
 	}
 	else {
@@ -199,15 +199,8 @@ void Creature::use(Clickable* target, Player* player) {
 }
 
 void Creature::attack(Clickable* target) {
-	//if (/*typeid(*target).name() == "class Creature"*/) {
 	target->acceptAttack(this->damage);
 	this->health -= target->getDamage();
-	//}
-	/* function for character
-	else if (typeid(*target).name() == "class Character") {
-		target->acceptAttack(this->damage);
-	}
-	*/
 }
 void Creature::acceptAttack(int damage){
 	//if(!isCard)

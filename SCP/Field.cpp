@@ -52,11 +52,25 @@ Clickable* Field::useCheckHands(bool isFirst) {
 	}
 	return nullptr;
 }
-
 Clickable* Field::useCheckField() {
 	//checking field press
-	if (hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y)) {
+	if (isMovedOn()) {
 		return this;
+	}
+	return nullptr;
+}
+Clickable* Field::useCheckPerson(bool isFirst) {
+	//checking field press
+	if (isFirst) {
+		if (firstP->getPerson()->isMovedOn()) {
+			return firstP->getPerson();
+		}
+	}
+
+	else{
+		if (secondP->getPerson()->isMovedOn()) {
+			return secondP->getPerson();
+		}
 	}
 	return nullptr;
 }
@@ -94,18 +108,26 @@ Clickable* Field::useCheck(vector<int>targets) {
 			if (buff != nullptr)
 				return buff;
 			break;
-		/*
+		
 		case 5:
+			buff = useCheckPerson(!(isFirst ^ true));
+			if (buff != nullptr)
+				return buff;
 			break;
 		case 6:
+			buff = useCheckPerson(!(isFirst ^ false));
+			if (buff != nullptr)
+				return buff;
 			break;
-		*/
+		
 		default:
 			cout << "\n\nFIELD.CPP ERROR: WRONG TYPE OF TARGET\n\n";
 		}
 	}
 
 }
+
+
 void Field::startGame() {
 	firstP->startGame(true);
 	secondP->startGame(false);
@@ -123,6 +145,10 @@ bool Field::nextTurn() {
 }
 void Field::draw(sf::RenderWindow& window, float time, Clickable* initiator) {
 	stepTime += time;
+	//drawing persons
+	//first
+	firstP->getPerson()->draw(window);
+	secondP->getPerson()->draw(window);
 
 	// drawing decks
 	sf::Texture Tdeck;
@@ -172,6 +198,8 @@ void Field::draw(sf::RenderWindow& window, float time, Clickable* initiator) {
 		curPlayer = secondP;
 	}
 
+	
+
 	//timer (for what)
 	sf::Text timer;
 	sf::Font font;
@@ -196,7 +224,7 @@ Player* Field::getCurPlayer() {
 	return secondP;
 }
 
-void Field::deathCheck(Player* player) {
+bool Field::deathCheck(Player* player) {
 	vector<Creature*>&curCreat = player->getEntities(); // mass of creatures of current player
 	int size = curCreat.size();
 	for (int i = 0; i < size; i++) {
@@ -207,10 +235,17 @@ void Field::deathCheck(Player* player) {
 			size = curCreat.size();
 		}
 	}
+
+	if (player->getPerson()->getHealth() <= 0) {
+		isStarted = false;
+		return true;
+	}
+	return false;
 }
-void Field::deathCheck() {
-	deathCheck(firstP);
-	deathCheck(secondP);
+Player* Field::deathCheck() {
+	if (deathCheck(firstP))return firstP;
+	if (deathCheck(secondP))return secondP;
+	return nullptr;
 }
 
 Creature* Field::checkCreature(Player* player) {

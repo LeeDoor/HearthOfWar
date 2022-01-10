@@ -86,6 +86,6 @@ void CDB::add
 void CDB::addAll() { // here i am adding all cards to the game
 	add("Skin Wyrm", 3, "Safe", "1545461", 4, 4, "pic\\021.png");
 	add("Egg Timer of Deja Vu", 2, "Euclid", "1231231", 2, 2, "pic\\292.png");
-	add("Some spell", 5, "Keter", "some fucking event", "pic\\006.jpg");
+	//add("Some spell", 5, "Keter", "some fucking event", "pic\\006.jpg");
 }
 

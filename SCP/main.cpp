@@ -8,12 +8,6 @@ class CDB;
 class Field;
 
 #include"headers\\includer.h"
-sf::Vector2f DECK_POS1(1627, 600);
-sf::Vector2f DECK_POS2(1627, 330);
-sf::Vector2f HAND_POS1(150, 850);
-sf::Vector2f HAND_POS2(15, 15);
-int MAX_ENTITY = 5;
-
 #include "headers\\Clickable.h"	// card data base
 #include "headers\\Card.h"	// card
 #include "headers\\Creature.h" // entity, creature
@@ -23,9 +17,50 @@ int MAX_ENTITY = 5;
 #include "headers\\Field.h"	// gaming field
 #include "headers\\CDB.h"	// card data base
 
+sf::Vector2f DECK_POS1(1627, 600);
+sf::Vector2f DECK_POS2(1627, 330);
+sf::Vector2f HAND_POS1(150, 850);
+sf::Vector2f HAND_POS2(15, 15);
+int MAX_ENTITY = 5;
+
+#include "headers\\drawWinScreen.h"
 void setDefaultToClick(Clickable*& initiator, vector<int>& targets) {
 	initiator = nullptr;
 	targets = vector<int>{ 0,2 };
+}
+
+void drawWinScreen(sf::RenderWindow& window, Player* player) {
+
+	// setting "you won" text
+	sf::Font font;
+	font.loadFromFile("fonts\\ariali.ttf");
+	sf::Text winnerText;
+	winnerText.setFont(font);
+	winnerText.setPosition(720, 700);
+	winnerText.setCharacterSize(80);
+	winnerText.setFillColor(sf::Color(74, 23, 20));
+	winnerText.setOutlineColor(sf::Color(235, 235, 235));
+	winnerText.setOutlineThickness(10);
+
+	//setting sprite of winner person
+
+	player->getPerson()->setPosition(sf::Vector2f(810, 390));
+	player->getPerson()->prepare();
+	if (!player->getIsFirst()) {
+		winnerText.setString("First player won!");
+		player->getPerson()->setTexture("pic\\person\\AllyHappy.png");
+		window.clear(sf::Color(133, 255, 139)); // light green
+	}
+	else {
+		winnerText.setString("Second player won!");
+		player->getPerson()->setTexture("pic\\person\\EnemyHappy.png");
+		window.clear(sf::Color(252, 205, 202)); // light red
+
+	}
+
+
+	window.draw(winnerText);
+	player->getPerson()->draw(window,false);
 }
 
 
@@ -53,6 +88,8 @@ int main() {
 	setDefaultToClick(initiator, targets);
 
 	float time;
+	Player* winStatus;
+
 	while (window.isOpen()) {
 		time = clock.restart().asMilliseconds();
 		sf::Event event;
@@ -64,6 +101,7 @@ int main() {
 			if (event.type == sf::Event::KeyPressed) {
 				if (event.key.code == sf::Keyboard::Space) {
 					field.nextTurn();
+					setDefaultToClick(initiator, targets);
 				}
 				if (event.key.code == sf::Keyboard::LAlt) {
 					field.startGame();
@@ -72,38 +110,45 @@ int main() {
 			if (event.type == sf::Event::MouseButtonPressed) {
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
-					buff = field.useCheck(targets);
-					if (buff != nullptr) {
-						if (initiator == nullptr) {
-							if (buff->getIsInitiator()) {
-								initiator = buff;
-								targets = initiator->getTargets();
+					if (field.getIsStarted()) {
+						buff = field.useCheck(targets);
+						if (buff != nullptr) {
+							if (initiator == nullptr) {
+								if (buff->getIsInitiator()) {
+									initiator = buff;
+									targets = initiator->getTargets();
+								}
 							}
-						}
-						else  {
-							if (buff->getIsTargetable()) {
-								initiator->use(buff, field.getCurPlayer());
-								buff = nullptr;
-								setDefaultToClick(initiator, targets);
+							else {
+								if (buff->getIsTargetable()) {
+									initiator->use(buff, field.getCurPlayer());
+									buff = nullptr;
+									setDefaultToClick(initiator, targets);
+								}
 							}
 						}
 					}
 				}
 				else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-					setDefaultToClick(initiator, targets);
+					if (field.getIsStarted()) {
+						setDefaultToClick(initiator, targets);
+					}
 				}
 			}
 		}
-		window.clear(sf::Color(168, 196, 255));
-
+		
+		
 		if (field.getIsStarted()) {
-			field.deathCheck();////////////////////////////////////////
+			window.clear(sf::Color(168, 196, 255));
 			field.draw(window, time, initiator);
+			winStatus = field.deathCheck();
+			if (winStatus != nullptr) {
+				drawWinScreen(window, winStatus);
+			}
+
+			window.display();
 		}
 
-
-
-		window.display();
 
 	}
 }

@@ -66,19 +66,14 @@ void Event::drawCard(sf::RenderWindow& window) {
 
 
 void Event::use(Clickable* target, Player* player) {
-	//here we need to write an algoritm to find targetable classes 
-	if (true/*typeid(*target).name() == "class Field"*/) {
-		// special event function
-
-		//removing card from hand
-		vector<Card*> cards = player->getDeck()->getHand();
-		int size = cards.size();
-		for (int i = 0; i < size; i++) {
-			if (cards[i] == this) {
-				cards.erase(cards.begin() + i);
-				break;
-			}
+	vector<Card*> cards = player->getDeck()->getHand();
+	int size = cards.size();
+	for (int i = 0; i < size; i++) {
+		if (cards[i] == this) {
+			cards.erase(cards.begin() + i);
+			break;
 		}
 	}
+
 }
 

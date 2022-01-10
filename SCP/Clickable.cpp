@@ -6,14 +6,16 @@ bool Clickable::getIsTargetable() {
 bool Clickable::getIsInitiator() {
 	return isInitiator;
 }
-int Clickable::getDamage() {return 1;}
-int Clickable::getHealth() {return 1;}
+int Clickable::getDamage() {return 0;}
+int Clickable::getHealth() {return 0;}
 vector<int> Clickable::getTargets() {
 	return targets;
 }
 
 void Clickable::use(Clickable* target, Player* player) {}
-void Clickable::acceptAttack(int damage) {}
+void Clickable::acceptAttack(int damage) {
+	cout << 'Q';
+}
 
 bool Clickable::isMovedOn() { // is cursor on an object
 	return hitbox.getGlobalBounds().contains(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);

@@ -7,6 +7,8 @@ private:
 	Player* firstP;
 	Player* secondP;
 
+	
+
 	bool isFirst = false; // is first playing now
 	bool isStarted = false; // is game started
 	
@@ -20,7 +22,7 @@ public:
 	Clickable* useCheckEntities(bool isFirst);
 	Clickable* useCheckHands(bool isFirst);
 	Clickable* useCheckField();
-	//Clickable* useCheckHeroes(bool isFirst);
+	Clickable* useCheckPerson(bool isFirst);
 
 	void startGame();
 	bool nextTurn();
@@ -29,8 +31,8 @@ public:
 	bool getIsStarted();
 	Player* getCurPlayer();
 
-	void deathCheck(Player* player);
-	void deathCheck();
+	bool deathCheck(Player* player);
+	Player* deathCheck();
 
 	//void chooseClear();
 	Creature* checkCreature(Player* player);
