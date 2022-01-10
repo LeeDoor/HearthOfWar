@@ -112,7 +112,7 @@ void Creature::viewAsEntity(sf::Vector2f pos, Clickable* initiator) {
 	hitbox.setTexture(&Tpic);
 	hitbox.setOutlineThickness(6);
 	if(this!=initiator)
-		hitbox.setOutlineColor(sf::Color(145, 145, 145, 100));
+			hitbox.setOutlineColor(sf::Color(145, 145, 145, 100));
 	else hitbox.setOutlineColor(sf::Color::Yellow);
 
 	/*

@@ -40,7 +40,7 @@ public:
 	void drawMenu(sf::RenderWindow& window);
 	void drawGame(sf::RenderWindow& window, float time, Clickable* initiator);
 	void drawWinScreen(sf::RenderWindow& window, Player* player);
-	void draw(sf::RenderWindow& window, float time, Clickable* initiator);
+	void draw(sf::RenderWindow& window, float time);
 
 	void CloseGame(sf::RenderWindow& window);
 	void exit();
@@ -50,5 +50,6 @@ public:
 	void afterEvent(sf::RenderWindow& window);
 
 	void playEvent(sf::Event event);
+	void nextTurn();
 };
 

@@ -42,8 +42,9 @@ void Person::prepare() {
 	Thp.setFont(font);
 	Thp.setString(to_string(health));
 	Thp.setPosition(sf::Vector2f(pos.x + 130, pos.y + 230));
-	Thp.setCharacterSize(50);
+	Thp.setCharacterSize(60);
 	Thp.setFillColor(sf::Color::Red);
+	Thp.setOutlineThickness(15);
 	Thp.setOutlineColor(sf::Color::White);
 	update();
 }
@@ -52,8 +53,9 @@ void Person::setPosition(sf::Vector2f pos) {
 }
 
 void Person::draw(sf::RenderWindow& window, bool drawHp) {
-	update();
-
 	window.draw(Spic);
-	if(drawHp)window.draw(Thp);
+	if (drawHp) {
+		window.draw(Thp);
+		update();
+	}
 }

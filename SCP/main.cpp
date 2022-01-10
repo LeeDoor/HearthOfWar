@@ -80,12 +80,6 @@ int main() {
 	Screen screen(cardDB);
 
 	Field* field = screen.getField();
-	
-	Clickable* initiator = nullptr; // we are saving initiator of some event
-	Clickable* buff; // needs to check variables of initiator to accept it
-	vector<int> targets; // where we will look for a target or an initiator
-
-	setDefaultToClick(initiator, targets);
 
 	
 
@@ -102,8 +96,8 @@ int main() {
 
 			screen.playEvent(event);
 		}
-		screen.draw(window,time,initiator);
-		window.display();
+		screen.afterEvent(window);
+		screen.draw(window,time);
 
 	}
 }

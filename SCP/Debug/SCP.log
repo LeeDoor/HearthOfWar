@@ -85,9 +85,8 @@ D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Field.cpp(273,67): warning C4244: аргуме�
           ]
   main.cpp
 D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(72,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(96,40): warning C4244: =: преобразование "sf::Int32" в "float", возможна потеря данных
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(93,10): warning C4101: winStatus: неиспользованная локальная переменная
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(85,13): warning C4101: buff: неиспользованная локальная переменная
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(90,40): warning C4244: =: преобразование "sf::Int32" в "float", возможна потеря данных
+D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(87,10): warning C4101: winStatus: неиспользованная локальная переменная
   Person.cpp
   Player.cpp
 D:\prjts\c++\HEARTHOFWAR\SCP\SCP\Player.cpp(51,21): warning C4018: <: несоответствие типов со знаком и без знака
