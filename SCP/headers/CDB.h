@@ -23,8 +23,7 @@ public:
 		string name,
 		int cost,
 		string fraction,
-		vector<string> feature,
-		vector<string> funcFeat,
+		vector<Func> funcs,
 		string description,
 		int damage,
 		int health,
@@ -46,8 +45,9 @@ public:
 		string name,
 		int cost,
 		string fraction,
-		vector<string> feature,
-		vector<string> funcFeat,
+		vector<Func>funcs,
+		vector<int> targets,
+		int damage,
 		string description,
 		string picPath
 	);

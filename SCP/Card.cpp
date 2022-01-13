@@ -24,8 +24,7 @@ Card::Card(Card* card) :
 	name(card->name),
 	cost(card->cost),
 	type(card->type),
-	feature(card->feature),
-	funcFeat(card->funcFeat),
+	funcs(card->funcs),
 	description(card->description)
 {
 	setTexture();
@@ -33,12 +32,6 @@ Card::Card(Card* card) :
 
 string Card::getGameClass() {
 	return gameClass;
-}
-vector<string> Card::getFeautre() {
-	return feature;
-}
-vector<string> Card::getFuncFeat() {
-	return funcFeat;
 }
 string Card::getPicPath() {
 	return picPath;
@@ -176,12 +169,14 @@ void Card::copy(Card* card) {
 	this->name = card->name;
 	this->cost = card->cost;
 	this->type = card->type;
-	this->feature = card->feature;
-	this->funcFeat = card->funcFeat;
+	this->funcs = card->funcs;
 	this->description = card->description;
 	this->gameClass = card->gameClass;
+	this->targets = card->targets;
 	setTexture();
 }
+
+
 void Card::setTexture() {
 	Tpic.loadFromFile(picPath, sf::IntRect(0, 0, 280, 180));
 	Tvalue.loadFromFile("pic\\BGvalue.png");

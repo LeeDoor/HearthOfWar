@@ -12,11 +12,12 @@ public:
 		string name,
 		int cost,
 		string type,
-		vector<string> feature,
-		vector<string> funcFeat,
+		vector<Func>funcs,
+		vector<int> targets,
+		int damage,
 		string description,
 		string picPath,
-		int id = -1);
+		int id);
 
 	Event(
 		string name,
@@ -26,11 +27,15 @@ public:
 		string picPath,
 		int id = -1);
 
+	int getDamage();
+
 	void copy(Card* card);
-	void use(Clickable* target, Player* player);
+	void use(Clickable* target, Player* player, Field* field);
 
 	void viewBig();
 	void viewLow();
-	void drawCard(sf::RenderWindow& window);
+	void drawCard(sf::RenderWindow& window); 
+
+	void selfFunc(Clickable* target, Field* field, string type);
 };
 

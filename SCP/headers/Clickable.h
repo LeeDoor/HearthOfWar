@@ -1,7 +1,7 @@
 #pragma once
 #include "includer.h"
 class Player;
-
+class Field;
 
 class Clickable
 {
@@ -23,7 +23,7 @@ public:
 	virtual int getHealth();
 	vector<int> getTargets();
 
-	virtual void use(Clickable* target, Player* player); // func to use card/entity
+	virtual void use(Clickable* target, Player* player, Field* field); // func to use card/entity
 	virtual void acceptAttack(int damage); // func for taking damage
 
 	bool isMovedOn();

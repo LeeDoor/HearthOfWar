@@ -16,8 +16,7 @@ Creature::Creature(
 	string name,
 	int cost,
 	string type,
-	vector<string> feature,
-	vector<string> funcFeat,
+	vector<Func> funcs,
 	string description,
 	int damage,
 	int health,
@@ -27,8 +26,7 @@ Creature::Creature(
 	this->name = name;
 	this->cost = cost;
 	this->type = type;
-	this->feature = feature;
-	this->funcFeat = funcFeat;
+	this->funcs = funcs;
 	this->description = description;
 
 	this->damage = damage;
@@ -67,6 +65,8 @@ void Creature::copy(Card* card) {
 	this->damage = card->getDamage();
 	this->health = card->getHealth();
 }
+
+
 #endif
 
 Creature::~Creature() {}
@@ -173,9 +173,10 @@ void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
 }
 
 //activity
-void Creature::use(Clickable* target, Player* player) {
-	if (isCard/* && typeid(*target).name() == "class Field"*/) {
+void Creature::use(Clickable* target, Player* player, Field* field) {
+	if (isCard) {
 		if (player->getCurMana() >= cost && player->getEntities().size() < MAX_ENTITY) {
+
 			player->minusCurMana(cost);
 			//summoning creature for our player
 			player->summonCreature(this);
@@ -193,6 +194,7 @@ void Creature::use(Clickable* target, Player* player) {
 			isTargetable = true;
 			targets = vector<int>{ 1,6 };
 		}
+
 	}
 	else {
 		attack(target);
@@ -200,6 +202,7 @@ void Creature::use(Clickable* target, Player* player) {
 }
 
 void Creature::attack(Clickable* target) {
+
 	target->acceptAttack(this->damage);
 	this->health -= target->getDamage();
 }

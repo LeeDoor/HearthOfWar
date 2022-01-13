@@ -1,11 +1,4 @@
-class Deck;
-class Player;
-class Card;
-class Creature;
-class Entity;
-class Event;
-class CDB;
-class Field;
+
 
 #include"headers\\includer.h"
 #include "headers\\Clickable.h"	// card data base
@@ -81,11 +74,9 @@ int main() {
 
 	Field* field = screen.getField();
 
-	
 
 	float time;
 	Player* winStatus;
-
 	while (window.isOpen()) {
 		time = clock.restart().asMilliseconds();
 		sf::Event event;

@@ -1,6 +1,10 @@
 #pragma once
 #include"includer.h"
-#include"Player.h"
+#include"Clickable.h"
+#include"Deck.h"
+class Player;
+class Creature;
+class Card;
 class Field : public Clickable
 {
 private:
@@ -30,6 +34,7 @@ public:
 
 	bool getIsStarted();
 	Player* getCurPlayer();
+	Deck* getDeck(bool isFirst);
 
 	bool deathCheck(Player* player);
 	Player* deathCheck();

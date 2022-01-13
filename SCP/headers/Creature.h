@@ -7,8 +7,6 @@
 class Creature :public Card
 {
 private:
-	int damage; // entity's damage
-	int health; // max health
 	bool isCard = true; // is it a card or an entity
 
 	sf::Text Tdamage;
@@ -23,13 +21,12 @@ public:
 		string name,
 		int cost,
 		string type,
-		vector<string> feature,
-		vector<string> funcFeat,
+		vector<Func> funcs,
 		string description,
 		int damage,
 		int health,
 		string picPath,
-		int id = -1
+		int id
 	);
 
 	Creature(
@@ -59,7 +56,7 @@ public:
 
 	void drawCard(sf::RenderWindow& window, int DrawType = -1);
 
-	void use(Clickable* target, Player* player);
+	void use(Clickable* target, Player* player,Field* field);
 	void attack(Clickable* target);
 	void acceptAttack(int damage);
 };

@@ -3,10 +3,18 @@
 #include"includer.h"
 #include "Animation.h"
 #include "Clickable.h"
+#include "Field.h"
 class Player;
+
+struct Func {
+	string feature; // battlecry deathrattle ongoing
+	function <void(Clickable*, Field*, int) > func; // function of button
+};
 
 class Card :public Clickable {
 protected:
+	int damage = 0; // entity's damage
+	int health; // max health
 
 	int id; // special id of a card
 	string gameClass;
@@ -15,11 +23,9 @@ protected:
 	string name;
 	int cost;//how much does it cost
 	string type; // danger level
-	vector<string> feature; // special property
-	vector<string> funcFeat; // function of special property (func has same position as feature -- 0 id is battlecry, 1 id is deathrattle(**){**})
-	string description; // what is this card do
-
 	
+	string description; // what is this card do
+	vector<Func> funcs;
 
 	bool isTaken; // i want to use it
 	bool isChoosen;// i want to see what does it do
@@ -51,8 +57,6 @@ public:
 
 	string getGameClass();
 
-	vector<string> getFeautre();
-	vector<string> getFuncFeat();
 	string getPicPath();
 	int getId();
 
@@ -71,8 +75,6 @@ public:
 
 	//ANIMATIONS
 	void AnimationTakeCard(bool isFirst, float timeLeft = 0);
-
-
 
 
 };

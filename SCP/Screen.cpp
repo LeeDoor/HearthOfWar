@@ -189,7 +189,7 @@ void Screen::playEvent(sf::Event event) {
 						}
 						else {
 							if (buff->getIsTargetable()) {
-								initiator->use(buff, field->getCurPlayer());
+								initiator->use(buff, field->getCurPlayer(), field);
 								buff = nullptr;
 								setDefaultToClick(initiator, targets);
 							}
@@ -219,4 +219,6 @@ void Screen::playEvent(sf::Event event) {
 void Screen::nextTurn() {
 	field->nextTurn();
 	setDefaultToClick(initiator, targets);
+
+	
 }

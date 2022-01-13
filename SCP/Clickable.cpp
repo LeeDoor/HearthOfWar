@@ -12,7 +12,7 @@ vector<int> Clickable::getTargets() {
 	return targets;
 }
 
-void Clickable::use(Clickable* target, Player* player) {}
+void Clickable::use(Clickable* target, Player* player, Field* field) { cout << "wrong func called\n"; }
 void Clickable::acceptAttack(int damage) {
 	cout << 'Q';
 }

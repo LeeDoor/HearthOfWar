@@ -7,7 +7,9 @@
 
 const int MAX_HAND_SIZE = 8;
 const int DECK_SIZE = 30;
-
+CDB* Deck::getCDB() {
+	return curDB;
+}
 void Deck::fillHand(bool isFirst) {
 	int size;
 	if (isFirst)
@@ -20,9 +22,6 @@ void Deck::fillHand(bool isFirst) {
 		takeCard(isFirst);
 	}
 }
-
-
-
 void Deck::addCard(int id) { // adds card to deck
 	Card* buff = curDB->getCard(id);
 	if (buff->getGameClass() == "Creature") {
@@ -32,6 +31,8 @@ void Deck::addCard(int id) { // adds card to deck
 	}
 	else {
 		Event* adding = new Event;
+		if (buff->getDamage() == -3)
+			cout << 123;
 		adding->copy(buff);
 		deck.push_back(adding);
 	}
@@ -41,6 +42,7 @@ void Deck::takeCard(bool isFirst) {
 		hand.push_back(left[left.size() - 1]);
 		hand[hand.size() - 1]->AnimationTakeCard(isFirst);
 		left.pop_back();
+
 	}
 }
 void Deck::addLeft(int id) {
@@ -52,6 +54,8 @@ void Deck::addLeft(int id) {
 	}
 	else {
 		Event* adding = new Event;
+		if (buff->getDamage() == -3)
+			cout << 123;
 		adding->copy(buff);
 		left.push_back(adding);
 	}
@@ -81,13 +85,9 @@ void  Deck::createDeck() {
 
 	int a;
 	for (int i = 0; i < DECK_SIZE; i++) {
-		while (true) {
-			cout << i + 1 << " : ";
-			a = rand() % curDB->getSize();
-			if (curDB->getCard(a) != 0) {
-				addCard(a);
-				break;
-			}
+		a = rand() % curDB->getSize();
+		if (curDB->getCard(a) != 0) {
+			addCard(a);
 		}
 	}
 }

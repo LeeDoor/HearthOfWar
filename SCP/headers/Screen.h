@@ -2,6 +2,9 @@
 #include"includer.h"
 #include"Field.h"
 #include"Button.h"
+#include"Deck.h"
+#include"Player.h"
+class CDB;
 
 class Screen
 {

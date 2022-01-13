@@ -223,6 +223,15 @@ Player* Field::getCurPlayer() {
 	if (isFirst)return firstP;
 	return secondP;
 }
+Deck* Field::getDeck(bool isFirst) {
+	Player* currPlayer;
+	if (isFirst)
+		currPlayer = firstP;
+	else
+		currPlayer = secondP;
+
+	return currPlayer->getDeck();
+}
 
 bool Field::deathCheck(Player* player) {
 	vector<Creature*>&curCreat = player->getEntities(); // mass of creatures of current player

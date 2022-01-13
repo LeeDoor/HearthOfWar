@@ -3,6 +3,7 @@
 #include"headers\\CDB.h"
 #include"headers\\Creature.h"
 #include"headers\\Event.h"
+#include"headers\\Player.h"
 CDB::CDB() {
 	addAll();
 
@@ -27,13 +28,12 @@ void CDB::add // creating !!!Creature!!!
 	string name,
 	int cost,
 	string fraction,
-	vector<string> feature,
-	vector<string> funcFeat,
+	vector<Func> funcs,
 	string description,
 	int damage,
 	int health,
 	string picPath) {
-	Creature* buff = new Creature{ name,cost,fraction, feature,funcFeat,description,damage,health,picPath,size++ };
+	Creature* buff = new Creature{ name,cost,fraction, funcs,description,damage,health,picPath,size++ };
 	cards.push_back(buff);
 }
 
@@ -57,13 +57,14 @@ void CDB::add // creating !!!Event!!!
 	string name,
 	int cost,
 	string fraction,
-	vector<string> feature,
-	vector<string> funcFeat,
+	vector<Func>funcs,
+	vector<int> targets,
+	int damage,
 	string description,
 	string picPath
 ) {
 
-	Event* buff = new Event{ name,cost,fraction, feature,funcFeat,description,picPath,size++ };
+	Event* buff = new Event{ name,cost,fraction, funcs,targets,damage, description,picPath,size++ };
 	cards.push_back(buff);
 }
 void CDB::add
@@ -81,11 +82,42 @@ void CDB::add
 
 // special functions for cards
 #ifdef block
+void Damage(Clickable* target, Field* field, int damage) {
+	target->acceptAttack(damage);
+}
 
+void Destroy(Clickable* target, Field* field, int damage) {
+
+	target->acceptAttack(target->getHealth());
+}
+
+void SummonCreature(Clickable* target, Field* field, int cdbid) {
+	Player* player;
+	Creature* buff;
+	player = field->getCurPlayer();
+	for (int i = 0; i < 3; i++) {
+		buff = new Creature;
+		buff->copy(field->getDeck(true)->getCDB()->getCard(cdbid));
+		player->summonCreature(buff);
+	}
+}
+
+void TotalKill(Clickable* target, Field* field, int cdbid) {
+	Player* player;
+	Creature* buff;
+	player = field->getCurPlayer();
+	for (int i = 0; i < 3; i++) {
+		buff = new Creature;
+		buff->copy(field->getDeck(true)->getCDB()->getCard(cdbid));
+		player->summonCreature(buff);
+	}
+}
 #endif
 void CDB::addAll() { // here i am adding all cards to the game
-	add("Skin Wyrm", 3, "Safe", "1545461", 4, 4, "pic\\021.png");
-	add("Egg Timer of Deja Vu", 2, "Euclid", "1231231", 2, 2, "pic\\292.png");
-	//add("Some spell", 5, "Keter", "some fucking event", "pic\\006.jpg");
+	/*0*/add("Skin Wyrm", 3, "Safe", "wooooo", 4, 4, "pic\\021.png");
+	/*1*/add("Doggie", 1, "Euclid", "rrrr", 1, 1, "pic\\019-2.jpg");
+	/*2*/add("Egg Timer of Deja Vu", 2, "Euclid", "shhh", 2, 2, "pic\\292.png");
+	/*3*/add("Some spell", 3, "Keter", vector<Func>{Func{ "battlecry",Destroy }}, vector<int>{1,6},3, "i am event", "pic\\006.jpg");
+	/*4*/add("HEALER", 2, "Safe", vector<Func>{Func{ "battlecry",SummonCreature }}, vector<int>{4},1, "i am second event", "pic\\016.jpg");
 }
 

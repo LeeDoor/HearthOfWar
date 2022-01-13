@@ -2,8 +2,8 @@
 
 #include"includer.h"
 #include"Card.h"
-#include"CDB.h"
-
+//#include"CDB.h"
+class CDB;
 class Deck
 {
 private:
@@ -24,7 +24,7 @@ public:
 	Card* operator[](int id);
 
 	Deck(CDB* cdb);
-
+	CDB* getCDB();
 	vector<Card*> getDeck();
 	vector<Card*> getLeft();
 	vector<Card*>& getHand();
