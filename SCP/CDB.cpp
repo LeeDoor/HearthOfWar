@@ -115,9 +115,9 @@ void TotalKill(Clickable* target, Field* field, int cdbid) {
 #endif
 void CDB::addAll() { // here i am adding all cards to the game
 	/*0*/add("Skin Wyrm", 3, "Safe", "wooooo", 4, 4, "pic\\021.png");
-	/*1*/add("Doggie", 1, "Euclid", "rrrr", 1, 1, "pic\\019-2.jpg");
+	/*1*/add("Doggie", 1, "Euclid", "rrrr", 1, 1, "pic\\019-2.png");
 	/*2*/add("Egg Timer of Deja Vu", 2, "Euclid", "shhh", 2, 2, "pic\\292.png");
-	/*3*/add("Some spell", 3, "Keter", vector<Func>{Func{ "battlecry",Destroy }}, vector<int>{1,6},3, "i am event", "pic\\006.jpg");
-	/*4*/add("HEALER", 2, "Safe", vector<Func>{Func{ "battlecry",SummonCreature }}, vector<int>{4},1, "i am second event", "pic\\016.jpg");
+	/*3*/add("Some spell", 3, "Keter", vector<Func>{Func{ "battlecry",Destroy }}, vector<int>{1,6},3, "i am event", "pic\\006.png");
+	/*4*/add("HEALER", 2, "Safe", vector<Func>{Func{ "battlecry",SummonCreature }}, vector<int>{4},1, "i am second event", "pic\\016.png");
 }
 
