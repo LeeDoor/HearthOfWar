@@ -73,9 +73,9 @@ void Event::drawCard(sf::RenderWindow& window) {
 
 
 
-void Event::use(Clickable* target, Player* player, Field* field) {
+void Event::use(Clickable* target, Player* player, Field* field, bool isFree) {
 	selfFunc(target, field,"battlecry");
-	cout << "event attack ";
+	player->minusCurMana(cost);
 	vector<Card*>& cards = player->getDeck()->getHand();
 	int size = cards.size();
 	for (int i = 0; i < size; i++) {

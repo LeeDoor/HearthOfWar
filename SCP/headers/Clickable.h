@@ -9,6 +9,8 @@ protected:
 	bool isTargetable; // can it be a target
 	bool isInitiator; // can this thing be an initiator (attacker)]
 	sf::RectangleShape hitbox; 
+
+
 	
 	vector<int> targets; // need to accepting attack to other objects
 	//0/1 -- curr/enem entities
@@ -23,7 +25,7 @@ public:
 	virtual int getHealth();
 	vector<int> getTargets();
 
-	virtual void use(Clickable* target, Player* player, Field* field); // func to use card/entity
+	virtual void use(Clickable* target, Player* player, Field* field, bool isFree  = false); // func to use card/entity
 	virtual void acceptAttack(int damage); // func for taking damage
 
 	bool isMovedOn();

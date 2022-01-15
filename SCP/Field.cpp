@@ -15,7 +15,7 @@ Field::Field(Player* secondP, Player* firstP) {
 
 	hitbox = sf::RectangleShape(sf::Vector2f(1500,600));
 	hitbox.setPosition(50,250);
-	hitbox.setFillColor(sf::Color(246, 255, 0,50));
+	hitbox.setFillColor(sf::Color(0, 17, 255, 20));
 }
 
 Clickable* Field::useCheckEntities(bool isFirst) {
@@ -60,13 +60,11 @@ Clickable* Field::useCheckField() {
 	return nullptr;
 }
 Clickable* Field::useCheckPerson(bool isFirst) {
-	//checking field press
 	if (isFirst) {
 		if (firstP->getPerson()->isMovedOn()) {
 			return firstP->getPerson();
 		}
 	}
-
 	else{
 		if (secondP->getPerson()->isMovedOn()) {
 			return secondP->getPerson();
@@ -144,6 +142,25 @@ bool Field::nextTurn() {
 	else return secondP->step(isFirst);
 }
 void Field::draw(sf::RenderWindow& window, float time, Clickable* initiator) {
+	window.draw(hitbox);
+
+	sf::Font font;
+	sf::Text mana;
+	font.loadFromFile("fonts\\ariali.ttf");
+	mana.setFont(font);
+	mana.setCharacterSize(70);
+	mana.setFillColor(sf::Color::Blue);
+	mana.setOutlineThickness(20);
+	mana.setOutlineColor(sf::Color::White);
+
+	mana.setString(to_string(firstP->getCurMana()));
+	mana.setPosition(1400, 900);
+	window.draw(mana);
+
+	mana.setString(to_string(secondP->getCurMana()));
+	mana.setPosition(1400, 30);
+	window.draw(mana);
+
 	stepTime += time;
 	//drawing persons
 	//first
@@ -169,6 +186,21 @@ void Field::draw(sf::RenderWindow& window, float time, Clickable* initiator) {
 	vector<Card*> toDraw;
 	bool chosen = false; // "big" card for whatching what is it doing
 
+	// draw entities
+	curPlayer = firstP;
+	space = 260;
+	for (int i = 0; i < 2; i++) {
+		size = curPlayer->getEntities().size();
+		for (int j = 0; j < size; j++) {
+			curPlayer->getEntities()[j]->viewAsEntity(time, sf::Vector2f(60 + space * j, 250 + (i == 0) * 270), initiator);
+			curPlayer->getEntities()[j]->drawCard(window, 3);
+		}
+		curPlayer = secondP;
+	}
+
+
+	curPlayer = firstP;
+	space = 0;
 	for (int q = 0; q < 2; q++) {
 		size = curPlayer->getDeck()->getHand().size();
 		for (int i = 0; i < size; i++) {
@@ -186,33 +218,8 @@ void Field::draw(sf::RenderWindow& window, float time, Clickable* initiator) {
 		toDraw[i]->drawCard(window);
 	}
 
-	// draw entities
-	curPlayer = firstP;
-	space = 260;
-	for (int i = 0; i < 2; i++) {
-		size = curPlayer->getEntities().size();
-		for (int j = 0; j < size; j++) {
-			curPlayer->getEntities()[j]->viewAsEntity(sf::Vector2f(60+space*j,250+(i==0)*270), initiator);
-			curPlayer->getEntities()[j]->drawCard(window,3);
-		}
-		curPlayer = secondP;
-	}
-
-	
-
-	//timer (for what)
-	sf::Text timer;
-	sf::Font font;
-	font.loadFromFile("fonts\\ariali.ttf");
-	timer.setFont(font);
-	timer.setString(to_string(firstP->getCurMana()) + to_string(secondP->getCurMana()));
-	timer.setPosition(0, 0);
-
-
-	window.draw(hitbox);
 	window.draw(Sdeck1);
 	window.draw(Sdeck2);
-	window.draw(timer);
 }
 
 
@@ -223,6 +230,11 @@ Player* Field::getCurPlayer() {
 	if (isFirst)return firstP;
 	return secondP;
 }
+Player* Field::getOtherPlayer() {
+	if (isFirst)return secondP;
+	return firstP;
+}
+
 Deck* Field::getDeck(bool isFirst) {
 	Player* currPlayer;
 	if (isFirst)
@@ -260,7 +272,7 @@ Player* Field::deathCheck() {
 Creature* Field::checkCreature(Player* player) {
 	int size = player->getEntities().size();
 	for (int i = 0; i < size; i++) {
-		if (player->getEntities()[i]->isMovedOn()) {
+		if (player->getEntities()[i]->isMovedOn() ) {
 			return player->getEntities()[i];
 		}
 	}

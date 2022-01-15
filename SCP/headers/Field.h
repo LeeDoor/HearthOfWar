@@ -34,6 +34,7 @@ public:
 
 	bool getIsStarted();
 	Player* getCurPlayer();
+	Player* getOtherPlayer();
 	Deck* getDeck(bool isFirst);
 
 	bool deathCheck(Player* player);

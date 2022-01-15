@@ -111,10 +111,10 @@ void Card::viewBig() {
 // chosen - is there any picked cards
 // target - if this object equals target, border is yellow to show it.
 void Card::Display(int& space, float time, int mana, bool& chosen, bool deckFirst, bool isFirst, bool isTop, Clickable* initiator) { // function decides which type of drawing we will be using
-	if(animation.animationType == "takeCard")
+	if (animation.animationType == "takeCard")
 	{
-		AnimationTakeCard(isFirst,time);
-		DrawType = 1;
+		AnimationTakeCard(isFirst, time);
+		DrawType = 2;
 	}
 	else {
 		hitbox.setFillColor(sf::Color::Black);
@@ -135,30 +135,30 @@ void Card::Display(int& space, float time, int mana, bool& chosen, bool deckFirs
 		else {
 			DrawType = 1;
 		}
-		setPos(pos);
-		switch (DrawType) {
-		case 0:
-			viewBig();
-			space += 320;
-			chosen = true;
-			break;
-		case 1:
-			viewLow(isTop);
-			space += 80;
-			break;
+	}
+	setPos(pos);
+	switch (DrawType) {
+	case 0:
+		viewBig();
+		space += 320;
+		chosen = true;
+		break;
+	case 1:
+		viewLow(isTop);
+		space += 80;
+		break;
 
-		case 2:
-			space += 80;
-			viewBack(isTop);
-		}
-		if (this == initiator) {
-			hitbox.setOutlineThickness(8);
-			hitbox.setOutlineColor(sf::Color::Yellow);
-		}
-		else if (cost <= mana && DrawType != 2) {
-			hitbox.setOutlineThickness(8);
-			hitbox.setOutlineColor(sf::Color::Green);
-		}
+	case 2:
+		space += 80;
+		viewBack(isTop);
+	}
+	if (this == initiator) {
+		hitbox.setOutlineThickness(8);
+		hitbox.setOutlineColor(sf::Color::Yellow);
+	}
+	else if (cost <= mana && DrawType != 2) {
+		hitbox.setOutlineThickness(8);
+		hitbox.setOutlineColor(sf::Color::Green);
 	}
 }
 

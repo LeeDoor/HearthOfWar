@@ -169,10 +169,10 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CDB.h" />
-    <ClInclude Include="Clickable.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="headers\Card.h" />
+    <ClInclude Include="headers\Clickable.h" />
     <ClInclude Include="headers\Event.h" />
     <ClInclude Include="headers\Field.h" />
     <ClInclude Include="headers\Person.h" />

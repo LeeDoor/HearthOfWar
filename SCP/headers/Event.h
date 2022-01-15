@@ -2,6 +2,7 @@
 
 #include"includer.h"
 #include"Card.h"
+#include <cmath>
 
 class Event :public Card
 {
@@ -30,7 +31,7 @@ public:
 	int getDamage();
 
 	void copy(Card* card);
-	void use(Clickable* target, Player* player, Field* field);
+	void use(Clickable* target, Player* player, Field* field, bool isFree = false);
 
 	void viewBig();
 	void viewLow();

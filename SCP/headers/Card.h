@@ -29,6 +29,7 @@ protected:
 
 	bool isTaken; // i want to use it
 	bool isChoosen;// i want to see what does it do
+
 	Animation animation;
 	float animationTimer = 0;
 
@@ -38,9 +39,11 @@ protected:
 	sf::Texture Tbg;
 	sf::Texture Tpic;
 	sf::Texture Tvalue;
+
 	sf::Sprite Sbg;
 	sf::Sprite Spic;
 	sf::Sprite Scost;
+
 	sf::Font font;
 	sf::Text Ttitle;
 	sf::Text Tdesc;
@@ -66,7 +69,6 @@ public:
 	void viewBack(bool isTop = false);
 
 	void Display(int& space, float time, int mana, bool& chosen, bool deckFirst, bool isFirst, bool isTop, Clickable* initiator);
-
 
 	virtual void copy(Card* card);
 	void setTexture();

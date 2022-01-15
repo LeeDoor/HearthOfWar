@@ -25,15 +25,22 @@ void Player::startGame(bool isFirst) {
 	deck->startGame(isFirst);
 	person = new Person(isFirst);
 	person->prepare();
-	mana = 0;
+	mana = 1;
 	curMana = mana;
 
 	entities.clear();
 }
 bool Player::step(bool isFirst) {
-	mana++;
+	if(mana<=9)
+		mana++;
 	curMana = mana;
 	deck->takeCard(isFirst);
+
+	int size = getEntities().size();
+	for (int i = 0; i < size; i++) {
+		getEntities()[i]->step();
+	}
+
 	return (true);
 }
 vector<Creature*> &Player::getEntities() {

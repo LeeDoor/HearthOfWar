@@ -6,6 +6,7 @@
 #include"headers\\Player.h"
 
 extern int MAX_ENTITY;
+const int TAKE_DAMAGE_ANIMATION = 1000;
 
 #define block
 
@@ -22,20 +23,8 @@ Creature::Creature(
 	int health,
 	string picPath,
 	int id
-) {
-	this->name = name;
-	this->cost = cost;
-	this->type = type;
+) : Creature(name, cost, type, description, damage, health, picPath, id) {
 	this->funcs = funcs;
-	this->description = description;
-
-	this->damage = damage;
-	this->health = health;
-	this->id = id;
-	this->picPath = picPath;
-	this->gameClass = "Creature";
-
-	setTexture();
 }
 
 Creature::Creature(
@@ -78,7 +67,15 @@ int Creature::getDamage() {
 int Creature::getHealth() {
 	return health;
 }
-
+bool Creature::getIsInitiator() {
+	return isInitiator;
+}
+void Creature::setIsCard(bool isCard) {
+	this->isCard = isCard;
+}
+void Creature::setHealth(int health) {
+	this->health = health;
+}
 //viewing
 void Creature::viewBig() {
 	Card::viewBig();
@@ -103,7 +100,7 @@ void Creature::viewBig() {
 void Creature::viewLow() {
 	Card::viewLow();
 }
-void Creature::viewAsEntity(sf::Vector2f pos, Clickable* initiator) {
+void Creature::viewAsEntity(float time, sf::Vector2f pos, Clickable* initiator) {
 	this->pos = pos;
 
 
@@ -147,10 +144,26 @@ void Creature::viewAsEntity(sf::Vector2f pos, Clickable* initiator) {
 	Thealth.setPosition(sf::Vector2f(pos.x + 135, pos.y + 130));
 	Thealth.setFillColor(sf::Color::Green);
 
+	Ttakendmg.setFont(font);
+	Ttakendmg.setCharacterSize(25);
+	Ttakendmg.setPosition(sf::Vector2f(pos.x + 80, pos.y + 80));
+	Ttakendmg.setOutlineColor(sf::Color::White);
+	Ttakendmg.setOutlineThickness(15);
+
+	if (isDrawingEffect) {
+		animationTimer += time;
+		if (animationTimer >= TAKE_DAMAGE_ANIMATION) {
+			animationTimer = 0;
+			isDrawingEffect = false;
+		}
+	}
+	else animationTimer = 0;
 
 	DrawType = 3;
 }
 void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
+	if (DrawType != -1)this->DrawType = DrawType;
+	else DrawType = this->DrawType;
 	Card::drawCard(window, DrawType);
 	if (DrawType == 0) {
 		window.draw(Sdamage);
@@ -169,15 +182,18 @@ void Creature::drawCard(sf::RenderWindow& window, int DrawType) {
 		window.draw(Tdamage);
 		window.draw(Shealth);
 		window.draw(Thealth);
+		if(isDrawingEffect)
+			window.draw(Ttakendmg);
 	}
 }
 
 //activity
-void Creature::use(Clickable* target, Player* player, Field* field) {
+void Creature::use(Clickable* target, Player* player, Field* field, bool isFree) {
 	if (isCard) {
-		if (player->getCurMana() >= cost && player->getEntities().size() < MAX_ENTITY) {
+		if ((player->getCurMana() >= cost || isFree) && player->getEntities().size() < MAX_ENTITY) {
 
-			player->minusCurMana(cost);
+			if(!isFree)
+				player->minusCurMana(cost);
 			//summoning creature for our player
 			player->summonCreature(this);
 
@@ -202,11 +218,27 @@ void Creature::use(Clickable* target, Player* player, Field* field) {
 }
 
 void Creature::attack(Clickable* target) {
-
+	isInitiator = false;
 	target->acceptAttack(this->damage);
-	this->health -= target->getDamage();
+	this->acceptAttack(target->getDamage());
 }
 void Creature::acceptAttack(int damage){
-	//if(!isCard)
-	this->health -= damage;
+	if (!isCard) {
+		this->health -= damage;
+		isDrawingEffect = true;
+		Ttakendmg.setString("");
+		if (damage > 0) {
+			Ttakendmg.setFillColor(sf::Color::Red);
+			Ttakendmg.setString("-" + to_string(abs(damage)));
+		}
+		else if (damage < 0) {
+			Ttakendmg.setFillColor(sf::Color::Green);
+			Ttakendmg.setString("+" + to_string(abs(damage)));
+		}
+	}
 }
+
+void Creature::step() {
+	isInitiator = true;
+}
+

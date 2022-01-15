@@ -13,10 +13,10 @@ private:
 	vector<Creature*> entities;
 
 
-	int mana;
-	int curMana;
+	int mana = 0;
+	int curMana = mana;
 
-	bool isFirst;
+	bool isFirst = false;
 public:
 	Player() {}
 	Player(Deck* deck);

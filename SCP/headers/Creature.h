@@ -8,11 +8,16 @@ class Creature :public Card
 {
 private:
 	bool isCard = true; // is it a card or an entity
+	bool isDrawingEffect = false;
 
 	sf::Text Tdamage;
 	sf::Text Thealth;
 	sf::Sprite Sdamage;
 	sf::Sprite Shealth;
+
+	sf::Text Ttakendmg;
+
+	
 public:
 	// constructor
 #ifdef block
@@ -26,8 +31,8 @@ public:
 		int damage,
 		int health,
 		string picPath,
-		int id
-	);
+		int id = -1
+	) ;
 
 	Creature(
 		string name,
@@ -52,12 +57,19 @@ public:
  
 	void viewBig();
 	void viewLow();
-	void viewAsEntity(sf::Vector2f pos, Clickable* initiator);
+
+	void setIsCard(bool isCard);
+	void setHealth(int health);
+	bool getIsInitiator();
+
+	void viewAsEntity(float time, sf::Vector2f pos, Clickable* initiator);
 
 	void drawCard(sf::RenderWindow& window, int DrawType = -1);
 
-	void use(Clickable* target, Player* player,Field* field);
+	void use(Clickable* target, Player* player, Field* field,bool isFree = false);
 	void attack(Clickable* target);
 	void acceptAttack(int damage);
+	void step();
+
 };
 

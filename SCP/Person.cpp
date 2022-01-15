@@ -5,7 +5,7 @@ Person::Person(bool isFirst) {
 	hitbox = sf::RectangleShape(sf::Vector2f(300,300));
 	this->isInitiator = false;
 	this->isTargetable = true;
-	health = 6;
+	health = 20;
 	if (isFirst) {
 		pos = sf::Vector2f(1600, 765);
 		Tpic.loadFromFile("pic\\person\\AllyStandart.png");
@@ -41,7 +41,7 @@ void Person::prepare() {
 	font.loadFromFile("fonts\\ariali.ttf");
 	Thp.setFont(font);
 	Thp.setString(to_string(health));
-	Thp.setPosition(sf::Vector2f(pos.x + 130, pos.y + 230));
+	Thp.setPosition(sf::Vector2f(pos.x + 130, pos.y + 200));
 	Thp.setCharacterSize(60);
 	Thp.setFillColor(sf::Color::Red);
 	Thp.setOutlineThickness(15);

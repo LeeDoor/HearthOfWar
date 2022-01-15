@@ -71,7 +71,7 @@ void Screen::drawMenu(sf::RenderWindow& window) {
 	}
 }
 void Screen::drawGame(sf::RenderWindow& window, float time, Clickable* initiator) {
-	window.clear(sf::Color::White);
+	window.clear(sf::Color(94, 255, 204));
 	field->draw(window, time, initiator);
 	buttons[0]->draw(window);
 }
@@ -164,6 +164,11 @@ void Screen::afterEvent(sf::RenderWindow& window) {
 }
 
 void Screen::playEvent(sf::Event event) {
+	if (event.type == sf::Event::KeyPressed) {
+		if (event.key.code == sf::Keyboard::P) {
+			isOpened = false;
+		}
+	}
 	if (event.type == sf::Event::MouseButtonPressed) {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			int size = buttons.size();
