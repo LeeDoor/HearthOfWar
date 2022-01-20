@@ -1,0 +1,16 @@
+﻿  Field.cpp
+d:\users\merlin\desktop\the scp game\the scp game\the scp game\field.cpp(195): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+d:\users\merlin\desktop\the scp game\the scp game\the scp game\field.cpp(294): warning C4244: аргумент: преобразование "T" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+  the SCP game.vcxproj -> d:\Users\Merlin\Desktop\the SCP game\the SCP game\Debug\the SCP game.exe

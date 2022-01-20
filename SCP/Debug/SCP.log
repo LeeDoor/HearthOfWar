@@ -1,5 +1,0 @@
-﻿  main.cpp
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(25,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(41,40): warning C4244: =: преобразование "sf::Int32" в "float", возможна потеря данных
-D:\prjts\c++\HEARTHOFWAR\SCP\SCP\main.cpp(39,10): warning C4101: winStatus: неиспользованная локальная переменная
-  SCP.vcxproj -> D:\prjts\c++\HEARTHOFWAR\SCP\Debug\SCP.exe
